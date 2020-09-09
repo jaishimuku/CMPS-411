@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./custom.css";
+import { ThemeProvider } from "@material-ui/core";
 
-function App() {
+import theme from "./theme";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
+import GlobalStyles from "./theme/GlobalStyles";
+import Welcome from "./components/bodyAdmin/welcome";
+import Layout from "./Layout";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router>
+        <Route exact path="/" component={Login} />
+        <Route path="/login" component={Login} />
+        {/* <Route path="/signup" component={SignUp} /> */}
+
+        <Route
+          path="/dashboardadmin"
+          render={({ match: { url } }) => (
+            <>
+              <Route path={`${url}/`} component={Welcome} exact />
+              <Route path={`${url}/welcome`} component={Welcome} />
+            </>
+          )}
+        />
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
