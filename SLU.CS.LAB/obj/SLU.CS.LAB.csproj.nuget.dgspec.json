@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Roshan\\Desktop\\411\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {}
+    "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Roshan\\Desktop\\411\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {
+    "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Roshan\\Desktop\\411\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
+        "projectUniqueName": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
         "projectName": "SLU.CS.LAB",
-        "projectPath": "C:\\Users\\Roshan\\Desktop\\411\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
-        "packagesPath": "C:\\Users\\Roshan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Roshan\\Desktop\\411\\CMPS-411\\SLU.CS.LAB\\obj\\",
+        "projectPath": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
+        "packagesPath": "C:\\Users\\muku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Roshan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -37,6 +37,38 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.7.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.7.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
