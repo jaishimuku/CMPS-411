@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {}
+    "C:\\Users\\muku\\Documents\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {
+    "C:\\Users\\muku\\Documents\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
+        "projectUniqueName": "C:\\Users\\muku\\Documents\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
         "projectName": "SLU.CS.LAB",
-        "projectPath": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
+        "projectPath": "C:\\Users\\muku\\Documents\\CMPS-411\\SLU.CS.LAB\\SLU.CS.LAB.csproj",
         "packagesPath": "C:\\Users\\muku\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muku\\Documents\\Project\\CMPS-411\\SLU.CS.LAB\\obj\\",
+        "outputPath": "C:\\Users\\muku\\Documents\\CMPS-411\\SLU.CS.LAB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\muku\\AppData\\Roaming\\NuGet\\NuGet.Config",
