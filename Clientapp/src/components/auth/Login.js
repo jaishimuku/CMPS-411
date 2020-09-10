@@ -10,6 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 // import NavBar from "./NavBar";
 import NavBar from "../../Layout/Navbar";
 import Logo from "../../assets/slulogo.png";
+import BaseURL from "../../BaseURL";
 
 const styles = (theme) => ({
   paper: {
@@ -70,7 +71,7 @@ class Login extends React.Component {
       Password: this.state.password,
     };
     console.log(FormData);
-    fetch(`/api/auth/login`, {
+    fetch(`${BaseURL}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(FormData),
