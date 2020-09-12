@@ -6,11 +6,13 @@ import Container from "@material-ui/core/Container";
 // import { createMuiTheme } from "@material-ui/core/styles";
 import { Redirect } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
+import {ToastContainer, toast, Zoom, Bounce, } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // import NavBar from "./NavBar";
 import NavBar from "../../Layout/Navbar";
 import Logo from "../../assets/slulogo.png";
-import BaseURL from "../../baseURL";
 import baseURL from "../../baseURL";
 
 const styles = (theme) => ({
@@ -50,6 +52,7 @@ class Login extends React.Component {
       password: "",
       islogin: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handlepassword = this.handlepassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,7 +74,17 @@ class Login extends React.Component {
       Username: this.state.username,
       Password: this.state.password,
     };
-    console.log(FormData);
+  
+    let toastProp = {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+   };
+
     fetch(`${baseURL}/api/auth/login`, {     //comment to test commit
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,19 +92,18 @@ class Login extends React.Component {
     })
       .then((response) => {
         if (response.ok) {
+          console.log("hello toast", toastProp)
+          sessionStorage.setItem("userData", JSON.stringify(response));
+          this.setState({ islogin: true });
+          toast.success("Login Successful!", toastProp);
+          console.log(FormData);
           return response.json();
         } else {
-          throw new Error("invalid login");
+           toast.error('Login Error', toastProp);
         }
       })
-      .then((response) => {
-        this.setState({ islogin: true });
-        // window.location.reload();
-        sessionStorage.setItem("userData", JSON.stringify(response));
-      })
       .catch((error) => {
-        console.error("error:", error);
-        alert(error);
+         console.error("error:", error);
       });
   }
   render() {
@@ -103,6 +115,7 @@ class Login extends React.Component {
     }
     return (
       <div>
+        <ToastContainer/>
         <NavBar />
         <Container component="main" maxWidth="xs">
           <CssBaseline />

@@ -5,10 +5,10 @@ import { ThemeProvider } from "@material-ui/core";
 
 import theme from "./theme";
 import Login from "./components/auth/Login";
-import SignUp from "./components/auth/SignUp";
 import GlobalStyles from "./theme/GlobalStyles";
 import Welcome from "./components/bodyAdmin/welcome";
 import Layout from "./Layout";
+import CreateTA from "./components/bodyAdmin/CreateTA";
 
 const App = () => {
   return (
@@ -25,6 +25,7 @@ const App = () => {
             <>
               <Route path={`${url}/`} component={Welcome} exact />
               <Route path={`${url}/welcome`} component={Welcome} />
+              <Route path={`${url}/addTA`} component={CreateTA} />
             </>
           )}
         />
