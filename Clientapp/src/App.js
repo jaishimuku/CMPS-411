@@ -8,7 +8,9 @@ import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import GlobalStyles from "./theme/GlobalStyles";
 import Welcome from "./components/bodyAdmin/welcome";
+import WelcomeTa from "./components/bodyAdmin/welcome_ta";
 import Layout from "./Layout";
+import LayoutTa from "./LayoutTa";
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
       <Router>
         <Route exact path="/" component={Login} />
         <Route path="/login" component={Login} />
+        <Route path="/dashboardTa" component={WelcomeTa} />
         {/* <Route path="/signup" component={SignUp} /> */}
 
         <Route

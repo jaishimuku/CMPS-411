@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 
-import Layout from "../../Layout";
+import Layout from "../../LayoutTa";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Welcome = (props) => {
+const WelcomeTa = (props) => {
   const classes = useStyles();
 
   return (
@@ -59,7 +60,7 @@ const Welcome = (props) => {
                     variant="h1"
                     gutterBottom
                   >
-                    Welcome Dr. Pao!
+                    Welcome Ta!
                   </Typography>
                 </CardContent>
               </Card>
@@ -71,4 +72,4 @@ const Welcome = (props) => {
   );
 };
 
-export default Welcome;
+export default WelcomeTa;

@@ -9,6 +9,7 @@ const routes = [
       { path: "/", element: <Login /> },
       { path: "login", element: <Login /> },
       { path: "dashboardadmin", element: <DashboardAdmin /> },
+      { path: "dashboardTa", element: <DashboardTa /> },
     ],
   },
   {
@@ -17,6 +18,7 @@ const routes = [
     children: [
       { path: "login", element: <Login /> },
       { path: "dashboardadmin", element: <DashboardAdmin /> },
+      { path: "dashboardTa", element: <DashboardTa /> },
     ],
   },
 ];
