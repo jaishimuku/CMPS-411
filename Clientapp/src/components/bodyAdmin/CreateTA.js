@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {ToastContainer, toast } from 'react-toastify';
 
 import baseURL from "../../baseURL";
+import Layout from "../../Layout";
 //import Logo from "../assets/slulogo.png";
 
 const styles = theme => ({
@@ -37,6 +38,35 @@ const styles = theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    root1: {
+        backgroundColor: theme.palette.background.dark,
+        minHeight: "100%",
+        paddingBottom: theme.spacing(1),
+        paddingTop: theme.spacing(3),
+      },
+      wrapper: {
+        display: "flex",
+        flex: "1 1 auto",
+        overflow: "hidden",
+        paddingTop: 64,
+        [theme.breakpoints.up("lg")]: {
+          paddingLeft: 256,
+        },
+      },
+      contentContainer: {
+        display: "flex",
+        flex: "1 1 auto",
+        overflow: "hidden",
+      },
+      content: {
+        flex: "1 1 auto",
+        height: "100%",
+        overflow: "auto",
+      },
+      title: {
+        textAlign: "center",
+        margin: 15,
+      },
 });
 
 class CreateTA extends React.Component {
@@ -101,7 +131,7 @@ class CreateTA extends React.Component {
          };
       
 
-         fetch(`https://localhost:44300/api/auth/register`, {
+         fetch(`${baseURL}/api/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(FormData)
@@ -131,97 +161,106 @@ class CreateTA extends React.Component {
         const {classes}  =this.props;
         const { firstName, lastName, username, password, email } = this.state;
         if (this.state.isCreated) {
-            return <Redirect to="/dashboardadmin" />
+            return <Redirect to="TA" />
         }
         return (
             <div>
                 <ToastContainer/>
-                <Nav />
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div 
-                    className = {classes.paper} >
+                <Layout />
+                <div className={classes.wrapper}>
+                    <div className={classes.contentContainer}>
+                        <div className={classes.content}>
+                        <Container className={classes.root1}>
+                    
+                            <Container component="main" maxWidth="xs">
+                            <CssBaseline />
+                            <div 
+                            className = {classes.paper} >
 
-                        {/* <img src={Logo} 
-                        className = {classes.logo}
-                         alt="Logo" /> */}
+                               
+                                <form 
+                                className = {classes.form}
+                                    onSubmit={this.handleSubmit}
+                                >
+                                    <TextField
+                                        name="firstName"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="FirstName"
+                                        autoComplete="firstName"
+                                        value={firstName}
+                                        autoFocus
+                                        onChange={this.handleFirstName}
+                                    />
+                                    <TextField
+                                        name="lastName"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label="LastName"
+                                        autoComplete="lastName"
+                                        value={lastName}
+                                        autoFocus
+                                        onChange={this.handleLastName}
+                                    />
+                                    <TextField
+                                        name="username"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="username"
+                                        label="Username"
+                                        autoComplete="username"
+                                        value={username}
+                                        autoFocus
+                                        onChange={this.handleUsername}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="email"
+                                        label="Email"
+                                        type="email"
+                                        id="email"
+                                        autoComplete="current-email"
+                                        value={email}
+                                        onChange={this.handleEmail}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        value={password}
+                                        onChange={this.handlePassword}
+                                    />
 
-                        <form 
-                        className = {classes.form}
-                            onSubmit={this.handleSubmit}
-                        >
-                            <TextField
-                                name="firstName"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="FirstName"
-                                autoComplete="firstName"
-                                value={firstName}
-                                autoFocus
-                                onChange={this.handleFirstName}
-                            />
-                            <TextField
-                                name="lastName"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="LastName"
-                                autoComplete="lastName"
-                                value={lastName}
-                                autoFocus
-                                onChange={this.handleLastName}
-                            />
-                            <TextField
-                                name="username"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="username"
-                                label="Username"
-                                autoComplete="username"
-                                value={username}
-                                autoFocus
-                                onChange={this.handleUsername}
-                            />
-                             <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="email"
-                                label="Email"
-                                type="email"
-                                id="email"
-                                autoComplete="current-email"
-                                value={email}
-                                onChange={this.handleEmail}
-                            />
-                             <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                value={password}
-                                onChange={this.handlePassword}
-                            />
+                                    <Button
+                                        className="button"
+                                        type="submit"
+                                        value="Submit"
+                                        className = {classes.color}
+                                        onClick={this.handleClick} >
+                                        ADD
+                                </Button>
+                                </form>
+                            </div>
+                        </Container>
 
-                            <Button
-                                className="button"
-                                type="submit"
-                                value="Submit"
-                                className = {classes.color}
-                                onClick={this.handleClick} >
-                                ADD
-                         </Button>
-                        </form>
-                    </div>
-                </Container>
+                    </Container>
+                </div>
+                </div>
+            </div>
+
+
             </div>
         );
     }

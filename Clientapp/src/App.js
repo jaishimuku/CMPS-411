@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./custom.css";
 import { ThemeProvider } from "@material-ui/core";
 
@@ -9,6 +9,7 @@ import GlobalStyles from "./theme/GlobalStyles";
 import Welcome from "./components/bodyAdmin/welcome";
 import Layout from "./Layout";
 import CreateTA from "./components/bodyAdmin/CreateTA";
+import GetTA from "./components/bodyAdmin/GetTA";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <>
               <Route path={`${url}/`} component={Welcome} exact />
               <Route path={`${url}/welcome`} component={Welcome} />
+              <Route path={`${url}/TA`} component={GetTA}/>
               <Route path={`${url}/addTA`} component={CreateTA} />
             </>
           )}

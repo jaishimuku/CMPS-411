@@ -37,7 +37,7 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/dashboardadmin/addTA",
+    href: "/dashboardadmin/TA",
     icon: UsersIcon,
     title: "TAs",
   },
