@@ -26,7 +26,7 @@ const App = () => {
             <>
               <Route path={`${url}/`} component={Welcome} exact />
               <Route path={`${url}/welcome`} component={Welcome} />
-              <Route path={`${url}/TA`} component={GetTA}/>
+              <Route path={`${url}/TA`} component={GetTA} />
               <Route path={`${url}/addTA`} component={CreateTA} />
             </>
           )}
