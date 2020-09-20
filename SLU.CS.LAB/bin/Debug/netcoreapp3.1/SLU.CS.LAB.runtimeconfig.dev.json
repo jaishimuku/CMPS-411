@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\muku\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\muku\\.nuget\\packages"
+      "C:\\Users\\chand\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\chand\\.nuget\\packages"
     ]
   }
 }
