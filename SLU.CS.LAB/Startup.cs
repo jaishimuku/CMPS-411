@@ -31,7 +31,7 @@ namespace SLU.CS.LAB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DataContext")));
-
+            
             services.AddControllers();
             services.AddScoped<IAuthRepository, AuthRepository>(); // service is created once per request; one instance per HTTP request and used in another request
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
