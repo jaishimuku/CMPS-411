@@ -82,5 +82,17 @@ namespace SLU.CS.LAB.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
+
+        
+        [HttpPost("Update")]
+        public IActionResult Update_Post(User user) 
+        {
+            DataContext.User.Update(user);
+            DataContext.SaveChanges();
+            return RedirectToAction("Index");
+        
+        }
+
+        
     }
 }

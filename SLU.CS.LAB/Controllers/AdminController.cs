@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SLU.CS.LAB.Data;
+using SLU.CS.LAB.Dtos;
 using SLU.CS.LAB.Models;
 
 namespace SLU.CS.LAB.Controllers
@@ -31,5 +32,31 @@ namespace SLU.CS.LAB.Controllers
             var result = await _context.Users.ToListAsync();
             return Ok(result);
         }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult<User>> DeleteUser(long Id)
+        {
+            var user = await _context.Users.FindAsync(Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        /*
+        private bool UserExists(long id) =>
+            _context.Users.Any(e => e.Id == id);
+
+        private static UserDTO UserDTO(User user) =>
+            new UserDTO
+            {
+                Id = user.Id,
+                 Username = user.FirstName,
+            };
+        */
+
     }
 }
