@@ -6,8 +6,8 @@ import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import Login from "./components/auth/Login";
 import GlobalStyles from "./theme/GlobalStyles";
-import Welcome from "./components/bodyAdmin/welcome";
-import Layout from "./Layout";
+import WelcomeAdmin from "../src/components/bodyAdmin/welcomeAdmin";
+import WelcomeTA from "./components/bodyTA/welcomeTA";
 import CreateTA from "./components/bodyAdmin/CreateTA";
 import GetTA from "./components/bodyAdmin/GetTA";
 
@@ -21,12 +21,22 @@ const App = () => {
         {/* <Route path="/signup" component={SignUp} /> */}
 
         <Route
+          path="/dashboardta"
+          render={({ match: { url } }) => (
+            <>
+              <Route path={`${url}/`} component={WelcomeTA} exact />
+              <Route path={`${url}/welcome`} component={WelcomeTA} />
+            </>
+          )}
+        />
+
+        <Route
           path="/dashboardadmin"
           render={({ match: { url } }) => (
             <>
-              <Route path={`${url}/`} component={Welcome} exact />
-              <Route path={`${url}/welcome`} component={Welcome} />
-              <Route path={`${url}/TA`} component={GetTA}/>
+              <Route path={`${url}/`} component={WelcomeAdmin} exact />
+              <Route path={`${url}/welcome`} component={WelcomeAdmin} />
+              <Route path={`${url}/TA`} component={GetTA} />
               <Route path={`${url}/addTA`} component={CreateTA} />
             </>
           )}

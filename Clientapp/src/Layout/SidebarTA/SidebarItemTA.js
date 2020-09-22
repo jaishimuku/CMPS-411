@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SidebarItem = ({ className, href, icon: Icon, title, ...rest }) => {
+const SidebarItemTA = ({ className, href, icon: Icon, title, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -59,4 +59,4 @@ const SidebarItem = ({ className, href, icon: Icon, title, ...rest }) => {
   );
 };
 
-export default SidebarItem;
+export default SidebarItemTA;

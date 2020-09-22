@@ -7,9 +7,9 @@ import {
   Grid,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import {ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 
-import Layout from "../../Layout";
+import LayoutTA from "../../Layout/SidebarTA/indexTA";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Welcome = (props) => {
+const WelcomeTA = (props) => {
   const classes = useStyles();
 
   return (
     <div>
-      <ToastContainer/>
-      <Layout />
+      <ToastContainer />
+      <LayoutTA />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
@@ -62,7 +62,7 @@ const Welcome = (props) => {
                     variant="h1"
                     gutterBottom
                   >
-                    Welcome Dr. Pao!
+                    Welcome TA!!
                   </Typography>
                 </CardContent>
               </Card>
@@ -74,4 +74,4 @@ const Welcome = (props) => {
   );
 };
 
-export default Welcome;
+export default WelcomeTA;
