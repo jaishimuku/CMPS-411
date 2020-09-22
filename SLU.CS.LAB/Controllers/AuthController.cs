@@ -38,10 +38,11 @@ namespace SLU.CS.LAB.Controllers
 
             var userToCreate = new User
             {
-                Username    = RegisterDto.Username,
-                FirstName   = RegisterDto.FirstName,
-                LastName    = RegisterDto.LastName,
-                Email       = RegisterDto.Email
+                Username = RegisterDto.Username,
+                FirstName = RegisterDto.FirstName,
+                LastName = RegisterDto.LastName,
+                Email = RegisterDto.Email,
+                IsAdmin = false
             };
 
             var createdUser = await _repo.Register(userToCreate, RegisterDto.Password);
@@ -82,17 +83,5 @@ namespace SLU.CS.LAB.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
-
-        
-        [HttpPost("Update")]
-        public IActionResult Update_Post(User user) 
-        {
-            DataContext.User.Update(user);
-            DataContext.SaveChanges();
-            return RedirectToAction("Index");
-        
-        }
-
-        
     }
 }

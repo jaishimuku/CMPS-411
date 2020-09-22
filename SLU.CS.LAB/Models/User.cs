@@ -15,5 +15,6 @@ namespace SLU.CS.LAB.Models
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

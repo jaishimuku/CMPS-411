@@ -27,16 +27,17 @@ namespace SLU.CS.LAB.Controllers
 
         //Get All Tutors
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAllUser()
+        public async Task<ActionResult<List<User>>> GetAllTA()
         {
-            var result = await _context.Users.ToListAsync();
+
+            var result = await _context.Users.Where(x => x.IsAdmin == false).ToListAsync();
             return Ok(result);
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<User>> DeleteUser(long Id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteTA(int id)
         {
-            var user = await _context.Users.FindAsync(Id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -44,19 +45,7 @@ namespace SLU.CS.LAB.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("User Delete");
         }
-        /*
-        private bool UserExists(long id) =>
-            _context.Users.Any(e => e.Id == id);
-
-        private static UserDTO UserDTO(User user) =>
-            new UserDTO
-            {
-                Id = user.Id,
-                 Username = user.FirstName,
-            };
-        */
-
     }
 }
