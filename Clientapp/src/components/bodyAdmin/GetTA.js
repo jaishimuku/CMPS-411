@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import { ToastContainer } from "react-toastify";
 
 import baseURL from "../../baseURL";
-import Layout from "../../Layout";
+import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
 
 const styles = () => ({
   color: {
@@ -101,7 +101,7 @@ class GetTA extends React.Component {
               paddingTop: "10vh",
             }}
           >
-            <Layout />
+            <LayoutAdmin />
             {tiers.map((tier) => (
               <div className={classes.taScreen}>
                 <Card

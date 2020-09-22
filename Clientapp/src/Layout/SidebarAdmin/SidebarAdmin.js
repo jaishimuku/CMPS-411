@@ -20,12 +20,11 @@ import {
   BookOpen as BookLogIcon,
 } from "react-feather";
 
-import SidebarItem from "./SidebarItem";
-import Logo from "../assets/drpao.png";
-import Welcome from "../components/bodyAdmin/welcome";
+import SidebarItemAdmin from "./SidebarItemAdmin";
+import Logo from "../../assets/drpao.png";
 
 const user = {
-  avatar: "../assets/drpao.png",
+  avatar: Logo,
   jobTitle: "Professor, SELU",
   name: "Dr. Kuo Pao Yang",
 };
@@ -84,7 +83,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Sidebar = ({ onMobileClose, openMobile }) => {
+const SidebarAdmin = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
 
   //const location = useLocation();
@@ -114,7 +113,7 @@ const Sidebar = ({ onMobileClose, openMobile }) => {
       <Box p={2}>
         <List>
           {items.map((item) => (
-            <SidebarItem
+            <SidebarItemAdmin
               href={item.href}
               key={item.title}
               title={item.title}
@@ -153,4 +152,4 @@ const Sidebar = ({ onMobileClose, openMobile }) => {
   );
 };
 
-export default Sidebar;
+export default SidebarAdmin;

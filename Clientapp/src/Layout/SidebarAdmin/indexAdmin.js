@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "../Navbar";
+import SidebarAdmin from "../SidebarAdmin/SidebarAdmin"; //either sidebarTA or sideAdmin
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //this component combines navbar and sidebar
-const Layout = () => {
+const LayoutAdmin = () => {
   const classes = useStyles();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <div className={classes.root}>
       <Navbar onMobileNavOpen={() => setMobileNavOpen(true)} />
-      <Sidebar
+      <SidebarAdmin
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
       />
@@ -29,4 +29,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LayoutAdmin;
