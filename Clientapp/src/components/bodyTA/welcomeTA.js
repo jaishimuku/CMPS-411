@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { ToastContainer } from "react-toastify";
+import { connect } from "react-redux";
 
 import LayoutTA from "../../Layout/SidebarTA/indexTA";
 
@@ -62,7 +63,7 @@ const WelcomeTA = (props) => {
                     variant="h1"
                     gutterBottom
                   >
-                    Welcome TA!!
+                    Welcome {props.val.username}!
                   </Typography>
                 </CardContent>
               </Card>
@@ -74,4 +75,9 @@ const WelcomeTA = (props) => {
   );
 };
 
-export default WelcomeTA;
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
+};
+export default connect(mapStateToProps, null)(WelcomeTA);
