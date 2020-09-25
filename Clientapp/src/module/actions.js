@@ -2,6 +2,7 @@ import baseURL from "../../src/baseURL";
 
 export const STORE_CREDS = "STORE_CREDS";
 export const SIGN_OUT = "SIGN_OUT";
+export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export function loginAction(username, token, isAdmin, isLoggedIn) {
   return {
@@ -10,6 +11,13 @@ export function loginAction(username, token, isAdmin, isLoggedIn) {
     token,
     isAdmin,
     isLoggedIn,
+  };
+}
+
+export function loginFail(error) {
+  return {
+    type: LOGIN_FAIL,
+    error,
   };
 }
 
@@ -30,7 +38,8 @@ export function loginThunk(username, password) {
         if (response.ok) {
           return response.json();
         } else {
-          console.log("Response not okay");
+          dispatch(loginFail("Error status::: ", response.status));
+          console.log("Response not okay", response.status);
         }
       })
       .then((json) => {
