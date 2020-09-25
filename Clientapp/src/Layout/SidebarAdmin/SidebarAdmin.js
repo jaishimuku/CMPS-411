@@ -61,7 +61,7 @@ const items = [
     title: "View Daily Logs",
   },
   {
-    href: "/login",
+    href: "/logout",
     icon: LogOutIcon,
     title: "Log Out",
   },

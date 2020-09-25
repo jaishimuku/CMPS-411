@@ -22,12 +22,7 @@ import {
 
 import SidebarItemTA from "./SidebarItemTA";
 import Logo from "../../assets/slulogo.png";
-
-const user = {
-  avatar: Logo,
-  jobTitle: "TA SELU",
-  name: "Test Name",
-};
+import { connect } from "react-redux";
 
 const items = [
   {
@@ -56,7 +51,7 @@ const items = [
     title: "Visit Log",
   },
   {
-    href: "/login",
+    href: "/logout",
     icon: LogOutIcon,
     title: "Log Out",
   },
@@ -78,9 +73,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SidebarTA = ({ onMobileClose, openMobile }) => {
+const SidebarTA = (props) => {
   const classes = useStyles();
 
+  const user = {
+    avatar: Logo,
+    jobTitle: "TA",
+    name: props.val.username,
+  };
   //const location = useLocation();
   // useEffect(() => {
   //   if (openMobile && onMobileClose) {
@@ -126,8 +126,8 @@ const SidebarTA = ({ onMobileClose, openMobile }) => {
         <Drawer
           anchor="left"
           classes={{ paper: classes.mobileDrawer }}
-          onClose={onMobileClose}
-          open={openMobile}
+          onClose={props.onMobileClose}
+          open={props.openMobile}
           variant="temporary"
         >
           {content}
@@ -147,4 +147,9 @@ const SidebarTA = ({ onMobileClose, openMobile }) => {
   );
 };
 
-export default SidebarTA;
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
+};
+export default connect(mapStateToProps, null)(SidebarTA);
