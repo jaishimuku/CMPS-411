@@ -4,15 +4,16 @@ import { combineReducers } from "redux";
 const initialState = {
   username: null,
   token: null,
-  isAdmin: false,
+  isAdmin: null,
   isLoggedIn: false,
+  error: null,
 };
 
 function logout(state) {
   sessionStorage.clear("userData");
   state = {
     ...state,
-    ...{ username: null, token: null, isAdmin: false, isLoggedIn: false },
+    ...{ username: null, token: null, isAdmin: null, isLoggedIn: false },
   };
   return state;
 }
@@ -29,6 +30,8 @@ const reducer = (state = initialState, action) => {
           isLoggedIn: action.isLoggedIn,
         },
       };
+    case actionTypes.LOGIN_FAIL:
+      return { ...state, ...{ error: action.error } };
     case actionTypes.SIGN_OUT:
       return logout(state);
     default:

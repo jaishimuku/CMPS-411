@@ -55,14 +55,26 @@ const Login = (props) => {
   const redirectCheck = () => {
     if (props.val.isAdmin === true) {
       return <Redirect to="/dashboardadmin" />;
-    } else {
+    } else if (props.val.isAdmin == false) {
       return <Redirect to="/dashboardta" />;
     }
   };
 
+  let toastProp = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+
   return (
     <div>
-      <ToastContainer />
+      {props.val.isLoggedIn && toast.success("Login Successful", toastProp)}
+
+      {/* <ToastContainer /> */}
       <NavBar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -112,7 +124,7 @@ const Login = (props) => {
             >
               Login
             </Button>
-            {props.val.username !== null && redirectCheck()}
+            {props.val.isLoggedIn === true && redirectCheck()}
           </form>
         </div>
       </Container>

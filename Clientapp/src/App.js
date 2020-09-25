@@ -20,7 +20,7 @@ const App = (props) => {
       <Router>
         <Route exact path="/" component={Login} />
         <Route path="/login" component={Login} />
-        {props.val.isAdmin ? ( //route according to role
+        {props.val.isAdmin === true && ( //route according to role
           <Route
             path="/dashboardadmin"
             render={({ match: { url } }) => (
@@ -32,7 +32,8 @@ const App = (props) => {
               </>
             )}
           />
-        ) : (
+        )}
+        {props.val.isAdmin === false && (
           <Route
             path="/dashboardta"
             render={({ match: { url } }) => (
