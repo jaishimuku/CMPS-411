@@ -7,10 +7,11 @@ import {
   Grid,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import { ToastContainer } from "react-toastify";
-import { connect } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import { connect, useDispatch } from "react-redux";
 
 import LayoutTA from "../../Layout/SidebarTA/indexTA";
+import { loginMsg } from "../../module/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,9 +47,27 @@ const useStyles = makeStyles((theme) => ({
 
 const WelcomeTA = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const hideMsg = () => {
+    dispatch(loginMsg(false));
+  };
+
+  let toastProp = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   return (
     <div>
+      {props.val.loginMsg === true &&
+        toast.success("Login Successful", toastProp) &&
+        hideMsg()}
       <ToastContainer />
       <LayoutTA />
       <div className={classes.wrapper}>
@@ -63,7 +82,7 @@ const WelcomeTA = (props) => {
                     variant="h1"
                     gutterBottom
                   >
-                    Welcome {props.val.username}!
+                    Welcome {props.val.firstName}!
                   </Typography>
                 </CardContent>
               </Card>

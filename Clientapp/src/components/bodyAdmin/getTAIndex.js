@@ -4,7 +4,7 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
-import Page from '../bodyAdmin/Page';
+import Page from '../ReusableComp/Page';
 import GetTA from './GetTA';
 
 

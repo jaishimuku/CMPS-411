@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 import baseURL from "../../baseURL";
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
-//import Logo from "../assets/slulogo.png";
 
 const styles = (theme) => ({
   paper: {

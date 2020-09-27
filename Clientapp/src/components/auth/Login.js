@@ -11,8 +11,9 @@ import { connect } from "react-redux";
 
 import NavBar from "../../Layout/Navbar";
 import Logo from "../../assets/slulogo.png";
+import { useDispatch } from "react-redux";
 
-import { loginThunk } from "../../module/actions";
+import { loginThunk, setErrorToNull, loginMsg } from "../../module/actions";
 
 const styles = makeStyles((theme) => ({
   paper: {
@@ -48,8 +49,14 @@ const Login = (props) => {
 
   const classes = styles();
 
+  const dispatch = useDispatch();
+
   const handleClick = () => {
     props.login(inputUsername, inputPassword);
+  };
+
+  const hideMsg = () => {
+    dispatch(loginMsg(false));
   };
 
   const redirectCheck = () => {
@@ -58,6 +65,10 @@ const Login = (props) => {
     } else if (props.val.isAdmin === false) {
       return <Redirect to="/dashboardta" />;
     }
+  };
+
+  const clearError = () => {
+    dispatch(setErrorToNull());
   };
 
   let toastProp = {
@@ -72,9 +83,10 @@ const Login = (props) => {
 
   return (
     <div>
-      {props.val.isLoggedIn && toast.success("Login Successful", toastProp)}
-
-      {/* <ToastContainer /> */}
+      {props.val.error !== null &&
+        toast.error(props.val.error, toastProp) &&
+        clearError()}
+      <ToastContainer />
       <NavBar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -124,7 +136,7 @@ const Login = (props) => {
             >
               Login
             </Button>
-            {props.val.isLoggedIn === true && redirectCheck()}
+            {props.val.isLoggedIn !== false && redirectCheck()}
           </form>
         </div>
       </Container>
@@ -141,4 +153,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   login: loginThunk,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+//usedispatch

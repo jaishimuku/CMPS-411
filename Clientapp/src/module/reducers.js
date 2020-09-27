@@ -5,15 +5,26 @@ const initialState = {
   username: null,
   token: null,
   isAdmin: null,
+  firstName: null,
+  lastName: null,
   isLoggedIn: false,
   error: null,
+  loginMsg: false,
 };
 
 function logout(state) {
   sessionStorage.clear("userData");
   state = {
     ...state,
-    ...{ username: null, token: null, isAdmin: null, isLoggedIn: false },
+    ...{
+      username: null,
+      token: null,
+      isAdmin: null,
+      firstName: null,
+      lastName: null,
+      isLoggedIn: false,
+      loginMsg: false,
+    },
   };
   return state;
 }
@@ -27,6 +38,8 @@ const reducer = (state = initialState, action) => {
           username: action.username,
           token: action.token,
           isAdmin: action.isAdmin,
+          firstName: action.firstName,
+          lastName: action.lastName,
           isLoggedIn: action.isLoggedIn,
         },
       };
@@ -34,6 +47,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, ...{ error: action.error } };
     case actionTypes.SIGN_OUT:
       return logout(state);
+    case actionTypes.LOGIN_SUCCESS_MSG:
+      return { ...state, ...{ loginMsg: action.show } };
+    case actionTypes.ERROR_CLEAR:
+      return { ...state, ...{ error: null } };
     default:
       return state;
   }

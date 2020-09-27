@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./custom.css";
 import { ThemeProvider } from "@material-ui/core";
 
@@ -12,31 +12,34 @@ import CreateTA from "./components/bodyAdmin/CreateTA";
 import GetTA from "./components/bodyAdmin/GetTA";
 import Logout from "./components/auth/Logout";
 import { connect } from "react-redux";
-import GetTicket from './components/bodyAdmin/getTickets';
+import NotFoundView from "./components/error";
+import getTickets from "./components/ReusableComp/getTickets";
+import ActivityLog from "./components/ReusableComp/ActivityLog/index";
 
-const App = (props) => {
+//FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
+//ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
+//(1)-------->
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        <Route exact path="/" component={Login} />
-        <Route path="/login" component={Login} />
-        {props.val.isAdmin === true && ( //route according to role
+        <Switch>
+          <Route exact path="/" component={Login} exact />
+          <Route path="/login" component={Login} exact />
           <Route
             path="/dashboardadmin"
             render={({ match: { url } }) => (
               <>
                 <Route path={`${url}/`} component={WelcomeAdmin} exact />
                 <Route path={`${url}/welcome`} component={WelcomeAdmin} />
-                <Route path={`${url}/TA`} component={GetTA} />
+                <Route path={`${url}/getTA`} component={GetTA} />
                 <Route path={`${url}/addTA`} component={CreateTA} />
-                <Route path={`${url}/tickets`} component={GetTicket} />
-
+                <Route path={`${url}/tickets`} component={getTickets} />
+                <Route path={`${url}/activityLog`} component={ActivityLog} />
               </>
             )}
           />
-        )}
-        {props.val.isAdmin === false && (
           <Route
             path="/dashboardta"
             render={({ match: { url } }) => (
@@ -46,18 +49,63 @@ const App = (props) => {
               </>
             )}
           />
-        )}
-
-        <Route path="/logout" component={Logout} />
+          <Route path="/logout" component={Logout} />
+          <Route component={NotFoundView} />
+        </Switch>
       </Router>
     </ThemeProvider>
   );
 };
+export default App;
 
-const mapStateToProps = (state) => {
-  return {
-    val: state.reducer,
-  };
-};
+//(2)------------->
+// const App = (props) => {
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <GlobalStyles />
+//       <Router>
+//         <Switch>
+//           <Route exact path="/" component={Login} exact />
+//           <Route path="/login" component={Login} exact />
+//           {props.val.isAdmin === true && ( //route according to role
+//             <Route
+//               path="/dashboardadmin"
+//               render={({ match: { url } }) => (
+//                 <>
+//                   <Route path={`${url}/`} component={WelcomeAdmin} exact />
+//                   <Route path={`${url}/welcome`} component={WelcomeAdmin} />
+//                   <Route path={`${url}/getTA`} component={GetTA} />
+//                   <Route path={`${url}/addTA`} component={CreateTA} />
+//                   <Route path={`${url}/tickets`} component={getTickets} />
+//                  <Route path={`${url}/activityLog`} component={ActivityLog} />
 
-export default connect(mapStateToProps, null)(App);
+//                 </>
+//               )}
+//             />
+//           )}
+//           {props.val.isAdmin === false && (
+//             <Route
+//               path="/dashboardta"
+//               render={({ match: { url } }) => (
+//                 <>
+//                   <Route path={`${url}/`} component={WelcomeTA} exact />
+//                   <Route path={`${url}/welcome`} component={WelcomeTA} />
+//                 </>
+//               )}
+//             />
+//           )}
+//           <Route path="/logout" component={Logout} />
+//           <Route component={NotFoundView} />
+//         </Switch>
+//       </Router>
+//     </ThemeProvider>
+//   );
+// };
+
+// const mapStateToProps = (state) => {
+//   return {
+//     val: state.reducer,
+//   };
+// };
+
+// export default connect(mapStateToProps, null)(App);
