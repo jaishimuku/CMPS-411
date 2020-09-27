@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Box, Container, makeStyles, Button } from "@material-ui/core";
-import Results from "./Results";
-import Toolbar from "./Toolbar";
+import { Box, Container, Grid, makeStyles } from "@material-ui/core";
+import ProductCard from "./ProductCard";
 import data from "./data";
 import LayoutAdmin from "../../../Layout/SidebarAdmin/indexAdmin";
 
@@ -31,15 +30,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     overflow: "auto",
   },
-  title: {
-    textAlign: "center",
-    margin: 15,
+  productCard: {
+    height: "100%",
   },
 }));
 
-const ActivityLog = () => {
+const getTicketsAdmin = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const [products] = useState(data);
 
   return (
     <div>
@@ -48,11 +46,20 @@ const ActivityLog = () => {
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Container className={classes.root}>
-              <div className={classes.root} title="Customers">
-                <Toolbar />
+              <div className={classes.root} title="Products">
                 <Box mt={3}>
-                  <Results customers={customers} />
+                  <Grid container spacing={3}>
+                    {products.map((product) => (
+                      <Grid item key={product.id} lg={4} md={6} xs={12}>
+                        <ProductCard
+                          className={classes.productCard}
+                          product={product}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Box>
+                <Box mt={3} display="flex" justifyContent="center"></Box>
               </div>
             </Container>
           </div>
@@ -62,4 +69,4 @@ const ActivityLog = () => {
   );
 };
 
-export default ActivityLog;
+export default getTicketsAdmin;

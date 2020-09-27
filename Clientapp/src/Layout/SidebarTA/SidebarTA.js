@@ -36,7 +36,7 @@ const items = [
     title: "Schedule",
   },
   {
-    href: "/dashboardta/welcome",
+    href: "/dashboardta/ticketsTA",
     icon: CalendarIcon,
     title: "Tickets",
   },
@@ -46,7 +46,7 @@ const items = [
     title: "Message",
   },
   {
-    href: "/dashboardta/welcome",
+    href: "/dashboardta/activityLogTA",
     icon: MessageIcon,
     title: "Visit Log",
   },
