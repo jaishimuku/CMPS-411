@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Box, Container, Grid, makeStyles } from "@material-ui/core";
-import ProductCard from "./ProductCard";
+import { Box, Container, makeStyles, Button } from "@material-ui/core";
+import Results from "./Results";
+import Toolbar from "./Toolbar";
 import data from "./data";
-import LayoutAdmin from "../../../Layout/SidebarAdmin/indexAdmin";
+import LayoutTA from "../../../Layout/SidebarTA/indexTA";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,36 +31,29 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     overflow: "auto",
   },
-  productCard: {
-    height: "100%",
+  title: {
+    textAlign: "center",
+    margin: 15,
   },
 }));
 
-const getTickets = () => {
+const ActivityLogTA = (props) => {
   const classes = useStyles();
-  const [products] = useState(data);
+  const [customers] = useState(data);
 
   return (
     <div>
-      <LayoutAdmin />
+      <LayoutTA />
+
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Container className={classes.root}>
-              <div className={classes.root} title="Products">
+              <div className={classes.root} title="Customers">
+                <Toolbar />
                 <Box mt={3}>
-                  <Grid container spacing={3}>
-                    {products.map((product) => (
-                      <Grid item key={product.id} lg={4} md={6} xs={12}>
-                        <ProductCard
-                          className={classes.productCard}
-                          product={product}
-                        />
-                      </Grid>
-                    ))}
-                  </Grid>
+                  <Results customers={customers} />
                 </Box>
-                <Box mt={3} display="flex" justifyContent="center"></Box>
               </div>
             </Container>
           </div>
@@ -69,4 +63,4 @@ const getTickets = () => {
   );
 };
 
-export default getTickets;
+export default ActivityLogTA;

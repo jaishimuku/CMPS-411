@@ -13,8 +13,10 @@ import GetTA from "./components/bodyAdmin/GetTA";
 import Logout from "./components/auth/Logout";
 import { connect } from "react-redux";
 import NotFoundView from "./components/error";
-import getTickets from "./components/ReusableComp/getTickets";
-import ActivityLog from "./components/ReusableComp/ActivityLog/index";
+import getTicketsAdmin from "./components/bodyAdmin/getTicketsAdmin/index";
+import getTicketsTA from "./components/bodyTA/getTicketsTA/index";
+import ActivityLogAdmin from "./components/bodyAdmin/ActivityLogAdmin/index";
+import ActivityLogTA from "./components/bodyTA/ActivityLogTA/index";
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
@@ -35,8 +37,14 @@ const App = () => {
                 <Route path={`${url}/welcome`} component={WelcomeAdmin} />
                 <Route path={`${url}/getTA`} component={GetTA} />
                 <Route path={`${url}/addTA`} component={CreateTA} />
-                <Route path={`${url}/tickets`} component={getTickets} />
-                <Route path={`${url}/activityLog`} component={ActivityLog} />
+                <Route
+                  path={`${url}/ticketsAdmin`}
+                  component={getTicketsAdmin}
+                />
+                <Route
+                  path={`${url}/activityLogAdmin`}
+                  component={ActivityLogAdmin}
+                />
               </>
             )}
           />
@@ -46,6 +54,11 @@ const App = () => {
               <>
                 <Route path={`${url}/`} component={WelcomeTA} exact />
                 <Route path={`${url}/welcome`} component={WelcomeTA} />
+                <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
+                <Route
+                  path={`${url}/activityLogTA`}
+                  component={ActivityLogTA}
+                />
               </>
             )}
           />
@@ -76,9 +89,8 @@ export default App;
 //                   <Route path={`${url}/welcome`} component={WelcomeAdmin} />
 //                   <Route path={`${url}/getTA`} component={GetTA} />
 //                   <Route path={`${url}/addTA`} component={CreateTA} />
-//                   <Route path={`${url}/tickets`} component={getTickets} />
-//                  <Route path={`${url}/activityLog`} component={ActivityLog} />
-
+//                 <Route path={`${url}/ticketsAdmin`} component={getTicketsAdmin} />
+//                  <Route path={`${url}/activityLogAdmin`} component={ActivityLogAdmin}/>
 //                 </>
 //               )}
 //             />
@@ -90,6 +102,9 @@ export default App;
 //                 <>
 //                   <Route path={`${url}/`} component={WelcomeTA} exact />
 //                   <Route path={`${url}/welcome`} component={WelcomeTA} />
+//
+//                        <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
+//                      <Route path={`${url}/activityLogTA`} component={ActivityLogTA} />
 //                 </>
 //               )}
 //             />
