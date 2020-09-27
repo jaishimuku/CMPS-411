@@ -36,7 +36,7 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/dashboardadmin/TA",
+    href: "/dashboardadmin/getTA",
     icon: UsersIcon,
     title: "TAs",
   },
@@ -46,7 +46,7 @@ const items = [
     title: "Schedule",
   },
   {
-    href: "/dashboardadmin/welcome",
+    href: "/dashboardadmin/tickets",
     icon: AlertCircleIcon,
     title: "Tickets",
   },
@@ -56,7 +56,7 @@ const items = [
     title: "Messages",
   },
   {
-    href: "/dashboardadmin/welcome",
+    href: "/dashboardadmin/activityLog",
     icon: BookLogIcon,
     title: "View Daily Logs",
   },

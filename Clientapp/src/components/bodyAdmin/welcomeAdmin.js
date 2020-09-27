@@ -6,11 +6,14 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core";
+import { useDispatch, connect } from "react-redux";
+
 import Container from "@material-ui/core/Container";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
-import ProductCard from '../bodyAdmin/getTickets/ProductCard';
+
+import { loginMsg } from "../../module/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,9 +49,27 @@ const useStyles = makeStyles((theme) => ({
 
 const WelcomeAdmin = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const hideMsg = () => {
+    dispatch(loginMsg(false));
+  };
+
+  let toastProp = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   return (
     <div>
+      {props.val.loginMsg === true &&
+        toast.success("Login Successful", toastProp) &&
+        hideMsg()}
       <ToastContainer />
       <LayoutAdmin />
       <div className={classes.wrapper}>
@@ -64,6 +85,7 @@ const WelcomeAdmin = (props) => {
                     gutterBottom
                   >
                     Welcome Dr. Pao!
+                    {/* <ProductCard/> */}
                   </Typography>
                 </CardContent>
               </Card>
@@ -75,4 +97,9 @@ const WelcomeAdmin = (props) => {
   );
 };
 
-export default WelcomeAdmin;
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
+};
+export default connect(mapStateToProps, null)(WelcomeAdmin);

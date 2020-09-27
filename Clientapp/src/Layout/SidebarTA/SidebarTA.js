@@ -79,14 +79,8 @@ const SidebarTA = (props) => {
   const user = {
     avatar: Logo,
     jobTitle: "TA",
-    name: props.val.username,
+    name: `${props.val.firstName} ${props.val.lastName}`,
   };
-  //const location = useLocation();
-  // useEffect(() => {
-  //   if (openMobile && onMobileClose) {
-  //     onMobileClose();
-  //   }
-  // }, [location.pathname]);
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
