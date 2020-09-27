@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 import { ToastContainer } from "react-toastify";
 
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
+import ProductCard from '../bodyAdmin/getTickets/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {

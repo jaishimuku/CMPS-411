@@ -55,7 +55,7 @@ const Login = (props) => {
   const redirectCheck = () => {
     if (props.val.isAdmin === true) {
       return <Redirect to="/dashboardadmin" />;
-    } else if (props.val.isAdmin == false) {
+    } else if (props.val.isAdmin === false) {
       return <Redirect to="/dashboardta" />;
     }
   };

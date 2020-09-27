@@ -1,197 +1,112 @@
-import React from "react";
-
-import { Redirect } from "react-router-dom";
-import Card from "@material-ui/core/Card";
-
-import { withStyles } from "@material-ui/core/styles";
-import { Container, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import PropTypes from 'prop-types';
 import { ToastContainer } from "react-toastify";
+import {
+  Box,
+  Card,
+  CardHeader,
+  Container,
+  Divider,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  makeStyles
+} from '@material-ui/core';
 
 import baseURL from "../../baseURL";
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
 
-const styles = () => ({
-  color: {
-    background: "#2f6b25",
-    color: "white",
-    paddingleft: "10vw",
-    marginLeft: "15vw",
-
-    "&:hover": {
-      background: "#ffa500",
-      color: "white",
-    },
-  },
-  taScreen: {
-    paddingLeft: "15vw",
-  },
-  delete: {
-    background: "#DC143C",
-    color: "white",
-    "&:hover": {
-      background: "#ffa500",
-      color: "white",
-    },
-  },
-  update: {
-    background: "#1E90FF",
-    color: "white",
-    "&:hover": {
-      background: "#ffa500",
-      color: "white",
-    },
-  },
-
-  title: {
-    textAlign: "center",
-    margin: 15,
-  },
-});
-
-class GetTA extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      tiers: [],
-    };
-    this.handleClick = this.handleClick.bind(this);
+const useStyles = makeStyles(() => ({
+  root: {},
+  actions: {
+    justifyContent: 'flex-end'
   }
+}));
 
-  handleClick() {
-    this.setState({ isLoaded: true });
-  }
+const GetTA = ({className, staticContext, ...rest}) => {
+  //const [isLoaded, setIsLoaded] = useState(false);
+  const [tiers, setTiers] = useState([]);
+  const [hasError, setErrors] = useState(false);
+  const data = JSON.parse(JSON.stringify(tiers));
+  const classes = useStyles();
 
-  componentDidMount() {
-    fetch(`${baseURL}/api/admin`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((myJson) => {
-        this.setState({
-          tiers: myJson,
-        });
-        console.log(myJson);
-      });
-  }
 
-  render() {
-    const ColoredLine = ({ color }) => (
-      <hr
-        style={{
-          color: color,
-          backgroundColor: color,
-          height: 5,
-          marginTop: "35px",
-        }}
-      />
-    );
-    const { classes } = this.props;
-    let { isLoaded, tiers } = this.state;
-    if (isLoaded) {
-      return <Redirect to="addTA" />;
-    } else {
-      return (
-        <>
-          <ToastContainer />
+  async function fetchData(){
+   const res = await fetch(`${baseURL}/api/admin`);
+      res
+      .json()
+      .then(res => setTiers(res))
+      .catch(err => setErrors(err));
+      }
+  useEffect(() => {
+    fetchData();
+  });
 
-          <Container
+
+  return (
+    <>
+    <ToastContainer/>
+    <Container
             style={{
-              paddingTop: "10vh",
+              paddingTop: "10vh"
             }}
           >
-            <LayoutAdmin />
-            {tiers.map((tier) => (
-              <div className={classes.taScreen}>
-                <Card
-                  variant="outlined"
-                  style={{
-                    margin: "10px",
-                  }}
+       <LayoutAdmin/> 
+    <Card
+      className={clsx(classes.root, className)}
+      {...rest}
+    >
+      <CardHeader title="Tutors" />
+      <Divider />
+      <PerfectScrollbar>
+        <Box minWidth={800}>
+          <Table>
+            <TableHead>
+              <TableRow>
+              <TableCell>
+                 <strong>Username</strong> 
+                </TableCell>
+                <TableCell>
+                <strong>Name</strong> 
+                </TableCell>
+                <TableCell>
+                <strong>Email</strong> 
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((ta) => (
+                <TableRow
+                  hover
+                  key={ta.id}
+                  // {...console.log(ta.id)}
                 >
-                  <Typography
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      padding: "5px",
-                      backgroundColor: "lightgrey",
-                    }}
-                  >
-                    Username: {tier.username}
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      padding: "5px",
-                      backgroundColor: "lightgrey",
-                    }}
-                  >
-                    First Name: {tier.firstName}
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      padding: "5px",
-                      backgroundColor: "lightgrey",
-                    }}
-                  >
-                    Last Name: {tier.lastName}
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      padding: "5px",
-                      backgroundColor: "lightgrey",
-                    }}
-                  >
-                    Email: {tier.email}
-                  </Typography>
-                </Card>
-                <Button
-                  className="button"
-                  type="submit"
-                  value="Submit"
-                  className={classes.delete}
-                  onClick={this.handleClick}
-                >
-                  Delete
-                </Button>
+                  <TableCell>
+                    {ta.username}
+                  </TableCell>
+                  <TableCell>
+                    {ta.firstName} {ta.lastName}
+                  </TableCell>
+                  <TableCell>
+                    {ta.email}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Box>
+      </PerfectScrollbar>
+    </Card>
+    </Container>
+    </>
+  );
+};
 
-                <Button
-                  className="button"
-                  type="submit"
-                  value="Submit"
-                  className={classes.update}
-                  onClick={this.handleClick}
-                >
-                  Update
-                </Button>
-                <ColoredLine
-                  color="#047923"
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                />
-              </div>
-            ))}
-
-            <Button
-              className="button"
-              type="submit"
-              value="Submit"
-              className={classes.color}
-              onClick={this.handleClick}
-            >
-              Add New TA
-            </Button>
-          </Container>
-        </>
-      );
-    }
-  }
-}
-export default withStyles(styles)(GetTA);
+GetTA.propTypes = {
+  className: PropTypes.string
+};
+export default GetTA;

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./custom.css";
 import { ThemeProvider } from "@material-ui/core";
 
@@ -12,6 +12,7 @@ import CreateTA from "./components/bodyAdmin/CreateTA";
 import GetTA from "./components/bodyAdmin/GetTA";
 import Logout from "./components/auth/Logout";
 import { connect } from "react-redux";
+import GetTicket from './components/bodyAdmin/getTickets';
 
 const App = (props) => {
   return (
@@ -29,6 +30,8 @@ const App = (props) => {
                 <Route path={`${url}/welcome`} component={WelcomeAdmin} />
                 <Route path={`${url}/TA`} component={GetTA} />
                 <Route path={`${url}/addTA`} component={CreateTA} />
+                <Route path={`${url}/tickets`} component={GetTicket} />
+
               </>
             )}
           />
