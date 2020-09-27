@@ -7,12 +7,14 @@ import rootReducer from "./module/reducers";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunkMiddleware))
-);
+// const store = createStore(
+//   rootReducer,
+//   composeEnhancers(applyMiddleware(thunkMiddleware))
+// );
+
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>
