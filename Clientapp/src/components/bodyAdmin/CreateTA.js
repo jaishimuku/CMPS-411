@@ -152,7 +152,7 @@ class CreateTA extends React.Component {
     const { classes } = this.props;
     const { firstName, lastName, username, password, email } = this.state;
     if (this.state.isCreated) {
-      return <Redirect to="TA" />;
+      return <Redirect to="getTA" />;
     }
     return (
       <div>

@@ -22,6 +22,22 @@ import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  delete: {
+    background: "#DC143C",
+    color: "white",
+    "&:hover": {
+      background: "#ffa500",
+      color: "white",
+    },
+  },
+  update: {
+    background: "#1E90FF",
+    color: "white",
+    "&:hover": {
+      background: "#ffa500",
+      color: "white",
+    },
+  },
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: "100%",
@@ -53,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GetTA = ({ className, staticContext, ...rest }) => {
-  //const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [tiers, setTiers] = useState([]);
   const [hasError, setErrors] = useState(false);
   const data = JSON.parse(JSON.stringify(tiers));
@@ -71,9 +87,16 @@ const GetTA = ({ className, staticContext, ...rest }) => {
   });
 
   const showAddTAPage = () => {
-    return <Redirect to="/addTA" />;
+    setIsLoaded(true);
+    console.log("hello")
   };
+  const handleClick = () => {
 
+    console.log("hello");
+  };
+  if (isLoaded) {
+    return <Redirect to="addTA" />;
+  }else
   return (
     <div>
       <div className={classes.wrapper}>
@@ -86,7 +109,7 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                 variant="contained"
                 style={{ margin: 20 }}
                 size="large"
-                onClick={showAddTAPage()} //button not redirecting issue!!!!
+                onClick = {showAddTAPage} //button not redirecting issue!!!!
               >
                 Add TA
               </Button>
@@ -119,8 +142,27 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                               {ta.firstName} {ta.lastName}
                             </TableCell>
                             <TableCell>{ta.email}</TableCell>
+                            <Button
+                                className="button"
+                                type="submit"
+                                value="Submit"
+                                className={classes.delete}
+                                onClick={handleClick}
+                            >
+                              Delete
+                            </Button>
+                            <Button
+                                className="button"
+                                type="submit"
+                                value="Submit"
+                                className={classes.update}
+                                onClick={handleClick}
+                             >
+                            Update
+                          </Button>
                           </TableRow>
                         ))}
+                       
                       </TableBody>
                     </Table>
                   </Box>
