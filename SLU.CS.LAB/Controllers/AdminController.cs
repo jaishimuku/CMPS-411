@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -46,6 +47,25 @@ namespace SLU.CS.LAB.Controllers
             await _context.SaveChangesAsync();
 
             return Ok("User Delete");
+        }
+
+        [HttpPut("{id}")]
+        public  IActionResult Index(int id, UpdateTADto user)
+        {
+            var userFromDb = _context.Users.Find(id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+            userFromDb.FirstName = user.FirstName;
+            userFromDb.LastName = user.LastName;
+            userFromDb.Username = user.Username;
+            userFromDb.Email = user.Email;
+
+            _context.Users.Update(userFromDb);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
