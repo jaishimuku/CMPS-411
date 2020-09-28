@@ -187,7 +187,6 @@ class CreateTA extends React.Component {
                         label="LastName"
                         autoComplete="lastName"
                         value={lastName}
-                        autoFocus
                         onChange={this.handleLastName}
                       />
                       <TextField
@@ -199,7 +198,6 @@ class CreateTA extends React.Component {
                         label="Username"
                         autoComplete="username"
                         value={username}
-                        autoFocus
                         onChange={this.handleUsername}
                       />
                       <TextField
