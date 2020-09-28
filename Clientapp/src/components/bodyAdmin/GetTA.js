@@ -16,6 +16,8 @@ import {
   TableRow,
   makeStyles,
 } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete'; 
+import EditIcon from '@material-ui/icons/Edit';
 
 import baseURL from "../../baseURL";
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
@@ -23,20 +25,12 @@ import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
-    background: "#DC143C",
-    color: "white",
-    "&:hover": {
-      background: "#ffa500",
-      color: "white",
-    },
+    margin: 20,
+    color: "#FF0000"
   },
   update: {
-    background: "#1E90FF",
-    color: "white",
-    "&:hover": {
-      background: "#ffa500",
-      color: "white",
-    },
+    margin: 20,
+    color: "#0000FF"
   },
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -69,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GetTA = ({ className, staticContext, ...rest }) => {
+  const [isDeleted, setIsDeleted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [tiers, setTiers] = useState([]);
   const [hasError, setErrors] = useState(false);
@@ -90,10 +85,13 @@ const GetTA = ({ className, staticContext, ...rest }) => {
     setIsLoaded(true);
     console.log("hello")
   };
-  const handleClick = () => {
+ function handleClick(id) {
+      fetch(`${baseURL}/api/Admin/` + id, {
+      method: "DELETE",
+    })
+    .catch(err => console.error(err))
+  }
 
-    console.log("hello");
-  };
   if (isLoaded) {
     return <Redirect to="addTA" />;
   }else
@@ -109,7 +107,7 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                 variant="contained"
                 style={{ margin: 20 }}
                 size="large"
-                onClick = {showAddTAPage} //button not redirecting issue!!!!
+                onClick = {showAddTAPage} 
               >
                 Add TA
               </Button>
@@ -132,6 +130,7 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                           <TableCell>
                             <strong>Email</strong>
                           </TableCell>
+                          <TableCell/>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -142,27 +141,22 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                               {ta.firstName} {ta.lastName}
                             </TableCell>
                             <TableCell>{ta.email}</TableCell>
-                            <Button
-                                className="button"
-                                type="submit"
-                                value="Submit"
+                            <TableCell>
+                               <DeleteIcon
                                 className={classes.delete}
-                                onClick={handleClick}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                                className="button"
-                                type="submit"
-                                value="Submit"
-                                className={classes.update}
-                                onClick={handleClick}
-                             >
-                            Update
-                          </Button>
+                                onClick={()=>handleClick(ta.id)}
+                              >
+                                  Delete
+                               </DeleteIcon>
+                               <EditIcon
+                                    className={classes.update}
+                                    onClick={handleClick}
+                               >
+                                  Update
+                              </EditIcon>
+                            </TableCell>
                           </TableRow>
                         ))}
-                       
                       </TableBody>
                     </Table>
                   </Box>
