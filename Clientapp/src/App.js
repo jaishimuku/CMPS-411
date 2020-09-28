@@ -17,6 +17,7 @@ import getTicketsAdmin from "./components/bodyAdmin/getTicketsAdmin/index";
 import getTicketsTA from "./components/bodyTA/getTicketsTA/index";
 import ActivityLogAdmin from "./components/bodyAdmin/ActivityLogAdmin/index";
 import ActivityLogTA from "./components/bodyTA/ActivityLogTA/index";
+import getScheduleGrid from "./components/bodyTA/Schedule/index";
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
@@ -53,7 +54,7 @@ const App = () => {
             render={({ match: { url } }) => (
               <>
                 <Route path={`${url}/`} component={WelcomeTA} exact />
-                <Route path={`${url}/welcome`} component={WelcomeTA} />
+                <Route path={`${url}/schedule`} component={getScheduleGrid} />
                 <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
                 <Route
                   path={`${url}/activityLogTA`}

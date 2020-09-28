@@ -31,7 +31,7 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/dashboardta/welcome",
+    href: "/dashboardta/schedule",
     icon: UsersIcon,
     title: "Schedule",
   },
