@@ -46,13 +46,13 @@ namespace SLU.CS.LAB.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User Delete");
+            return Ok("User Deleted");
         }
 
         [HttpPut("{id}")]
-        public  IActionResult Index(int id, UpdateTADto user)
+        public  async Task<IActionResult> UpdateTA(int id, UpdateTADto user)
         {
-            var userFromDb = _context.Users.Find(id);
+            var userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (userFromDb == null)
             {
                 return NotFound();

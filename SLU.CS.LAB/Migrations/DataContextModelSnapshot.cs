@@ -19,6 +19,39 @@ namespace SLU.CS.LAB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SLU.CS.LAB.Models.ActivityLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Course")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("TimeOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tutor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityLogs");
+                });
+
             modelBuilder.Entity("SLU.CS.LAB.Models.User", b =>
                 {
                     b.Property<int>("Id")
