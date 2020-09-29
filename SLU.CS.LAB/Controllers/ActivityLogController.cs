@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace SLU.CS.LAB.Controllers
         public async Task<ActionResult<List<ActivityLog>>> GetAllActivity()
         {
 
-            var result = await _context.ActivityLogs.ToListAsync();
+            var result = await _context.ActivityLogs.OrderByDescending(x => x.Id).ToListAsync();
             return Ok(result);
         }
 
