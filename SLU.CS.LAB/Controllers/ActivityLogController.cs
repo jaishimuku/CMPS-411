@@ -32,8 +32,12 @@ namespace SLU.CS.LAB.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateActivityLog(ActivityLog activityLog)
         {
-            
-                var actLog =  new ActivityLog
+            if (activityLog.WNumber == "" || activityLog.Name == "" || activityLog.Course == "" || activityLog.Topic == "") {
+                return StatusCode(400);
+            } //when empty data comes return 400 statuscode and this status code prompts toast error
+               
+            else {
+                var actLog = new ActivityLog
                 {
                     WNumber = activityLog.WNumber,
                     Name = activityLog.Name,
@@ -43,16 +47,16 @@ namespace SLU.CS.LAB.Controllers
                     Tutor = activityLog.Tutor
 
                 };
-
-                  await _context.ActivityLogs.AddAsync(actLog);
-                  _context.SaveChanges();
+                await _context.ActivityLogs.AddAsync(actLog);
+                _context.SaveChanges();
+            }
 
             return Ok();
 
         }
 
         [HttpPut("{id}")]
-        public  async Task<IActionResult> PostTimeOut(int id, ActivityLogDto activityLog)
+        public  async Task<IActionResult> PostTimeOut(int id)
         {
 
             var activityFromRepo = await _context.ActivityLogs.FirstOrDefaultAsync(x => x.Id == id);
@@ -61,13 +65,11 @@ namespace SLU.CS.LAB.Controllers
             {
                 return NotFound();
             }
-
-            activityFromRepo.TimeOut = activityLog.TimeOut;
-
-            _context.ActivityLogs.Update(activityFromRepo);
-             _context.SaveChanges();
-
-            return NoContent();
+            //activityFromRepo.TimeOut = activityLog.TimeOut;
+            //_context.ActivityLogs.Update(activityFromRepo);
+            activityFromRepo.TimeOut = DateTime.Now;
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpDelete("{id}")]

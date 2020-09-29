@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
+
 import clsx from "clsx";
 import {
   Box,
@@ -11,29 +13,98 @@ import {
   SvgIcon,
   makeStyles,
 } from "@material-ui/core";
-import { Search as SearchIcon } from "react-feather";
+import { connect } from "react-redux";
+import baseURL from "../../../baseURL";
+
+//import { Search as SearchIcon } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(2),
+      width: "95ch",
+    },
+    display: "flex",
+    flexDirection: "row",
+  },
   importButton: {
     marginRight: theme.spacing(1),
   },
   exportButton: {
     marginRight: theme.spacing(1),
   },
+  color: {
+    margin: 20,
+    background: "#2f6b25",
+    color: "white",
+    "&:hover": {
+      background: "#ffa500",
+      color: "white",
+    },
+  },
 }));
 
-const Toolbar = ({ className, ...rest }) => {
+const Toolbar = (props) => {
+  const [wNumber, setWNumber] = useState("");
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [topic, setTopic] = useState("");
+
   const classes = useStyles();
 
+  let toastProp = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+
+  // async function fetchData() {
+  //   const res = await fetch(`${baseURL}/api/admin`);
+  //   res
+  //     .json()
+  //     .then((res) => setTiers(res))
+  //     .catch((err) => setErrors(err));
+  // }
+
+  const handleSubmit = () => {
+    let FormData = {
+      wNumber: wNumber,
+      name: name,
+      course: course,
+      topic: topic,
+      tutor: props.val.firstName,
+    };
+
+    fetch(`${baseURL}/api/ActivityLog`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(FormData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          toast.success("Successfully added log!", toastProp);
+          return response.json();
+        } else {
+          toast.error("Error!", toastProp);
+        }
+      })
+      .catch((error) => {
+        console.error("error:", error);
+      });
+  };
+
   return (
-    <div className={clsx(classes.root, className)} {...rest}>
-      <Box display="flex" justifyContent="flex-end"></Box>
-      <Box mt={3}>
-        <Card>
-          <CardContent>
-            <Box maxWidth={500}>
-              <TextField
+    <div>
+      <Card>
+        <CardContent>
+          <ToastContainer />
+
+          <Box maxWidth={1200}>
+            {/* <TextField
                 fullWidth
                 InputProps={{
                   startAdornment: (
@@ -46,17 +117,54 @@ const Toolbar = ({ className, ...rest }) => {
                 }}
                 placeholder="Search customer"
                 variant="outlined"
+              /> */}
+
+            <form className={classes.root}>
+              <TextField
+                id="standard-textarea"
+                label="WNumber"
+                required
+                onChange={(event) => setWNumber(event.target.value)}
               />
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
+              <TextField
+                id="standard-textarea"
+                label="Name"
+                required
+                onChange={(event) => setName(event.target.value)}
+              />
+              <TextField
+                id="standard-textarea"
+                label="Course"
+                required
+                onChange={(event) => setCourse(event.target.value)}
+              />
+              <TextField
+                id="standard-textarea"
+                label="Topic"
+                required
+                onChange={(event) => setTopic(event.target.value)}
+              />
+              <Button
+                color="primary"
+                variant="contained"
+                className={classes.color}
+                size="large"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Save
+              </Button>
+            </form>
+          </Box>
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
-Toolbar.propTypes = {
-  className: PropTypes.string,
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
 };
-
-export default Toolbar;
+export default connect(mapStateToProps, null)(Toolbar);

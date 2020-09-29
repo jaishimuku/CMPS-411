@@ -135,8 +135,6 @@ class CreateTA extends React.Component {
         if (response.ok) {
           this.setState({ isCreated: true });
           toast.success("Successfully added new TA!", toastProp);
-          console.log(response.status);
-          console.log(FormData);
           return response.json();
         } else {
           toast.error("Error, Please try again!!!", toastProp);
