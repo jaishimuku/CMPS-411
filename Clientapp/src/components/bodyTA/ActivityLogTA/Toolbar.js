@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -150,7 +150,9 @@ const Toolbar = (props) => {
                 className={classes.color}
                 size="large"
                 type="submit"
-                onClick={handleSubmit}
+                onClick={() => {
+                  handleSubmit();
+                }}
               >
                 Save
               </Button>

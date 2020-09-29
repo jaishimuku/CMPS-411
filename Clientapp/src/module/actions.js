@@ -79,7 +79,8 @@ export function loginThunk(username, password) {
           )
         );
 
-        sessionStorage.setItem("userToken", JSON.stringify(json.token));
+        sessionStorage.setItem("username", JSON.stringify(username));
+
         dispatch(loginMsg(true));
       })
       .catch((error) => {

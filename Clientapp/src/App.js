@@ -54,6 +54,7 @@ const App = () => {
             render={({ match: { url } }) => (
               <>
                 <Route path={`${url}/`} component={WelcomeTA} exact />
+                <Route path={`${url}/welcome`} component={WelcomeTA} />
                 <Route path={`${url}/schedule`} component={getScheduleGrid} />
                 <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
                 <Route
