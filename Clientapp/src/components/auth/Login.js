@@ -128,7 +128,6 @@ const Login = (props) => {
               }}
             />
             <Button
-              className="button"
               type="submit"
               value="Submit"
               className={classes.color}

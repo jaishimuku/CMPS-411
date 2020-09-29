@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActivityLogTA = (props) => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const [students] = useState(data);
 
   return (
     <div>
@@ -49,10 +49,10 @@ const ActivityLogTA = (props) => {
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Container className={classes.root}>
-              <div className={classes.root} title="Customers">
+              <div className={classes.root}>
                 <Toolbar />
                 <Box mt={3}>
-                  <Results customers={customers} />
+                  <Results students={students} />
                 </Box>
               </div>
             </Container>
