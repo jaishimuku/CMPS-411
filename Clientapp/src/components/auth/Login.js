@@ -46,7 +46,7 @@ const styles = makeStyles((theme) => ({
 const Login = (props) => {
   const [inputUsername, setInputUsername] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-
+  console.log(props);
   const classes = styles();
 
   const dispatch = useDispatch();

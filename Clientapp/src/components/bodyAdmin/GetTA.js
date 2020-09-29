@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Edit from "./editTA"
 import { ToastContainer } from "react-toastify";
 import {
   Box,
@@ -21,7 +22,13 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import baseURL from "../../baseURL";
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+
+// export function loggedInUserDetail(id, firstName, lastName, email, userName) {
+//   return {
+//     id, firstName, lastName, email, userName 
+//   };
+// }
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -62,8 +69,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// export function fetchUserData () {
+//   return function (usersDetail) {
+//     return fetch(`${baseURL}/api/admin`)
+//     .then((response) => {
+
+//     }).then ((userDetails) => {
+//       usersDetail(loggedInUserDetail(
+//         userDetails.id,
+//         userDetails.firstName,
+//         userDetails.lastName,
+//         userDetails.email,
+//         userDetails.userName
+//       ))
+//     })
+//   }
+// }
+
 const GetTA = ({ className, staticContext, ...rest }) => {
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isRedirect, setIsRedirect] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [tiers, setTiers] = useState([]);
   const [hasError, setErrors] = useState(false);
@@ -71,31 +95,40 @@ const GetTA = ({ className, staticContext, ...rest }) => {
   const classes = useStyles();
 
   async function fetchData() {
-    const res = await fetch(`${baseURL}/api/admin`);
-    res
-      .json()
-      .then((res) => setTiers(res))
-      .catch((err) => setErrors(err));
+      const res = await fetch(`${baseURL}/api/admin`);
+      res
+        .json()
+        .then((res) => setTiers(res))
+        .catch((err) => setErrors(err));
   }
+
   useEffect(() => {
     fetchData();
   });
 
   const showAddTAPage = () => {
     setIsLoaded(true);
-    console.log("hello")
+    console.log(isLoaded);
   };
- function handleClick(id) {
+
+ function handleDelete(id) {
       fetch(`${baseURL}/api/Admin/` + id, {
       method: "DELETE",
     })
     .catch(err => console.error(err))
   }
 
+  function handleUpdate(id){
+    setIsRedirect(true);
+  }
+  
+
   if (isLoaded) {
     return <Redirect to="addTA" />;
-  }else
-  return (
+  } else if (isRedirect) {
+      return <Redirect to ="edit" />
+  } else { 
+    return (
     <div>
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
@@ -144,13 +177,13 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                             <TableCell>
                                <DeleteIcon
                                 className={classes.delete}
-                                onClick={()=>handleClick(ta.id)}
+                                onClick={()=>handleDelete(ta.id)}
                               >
                                   Delete
                                </DeleteIcon>
                                <EditIcon
                                     className={classes.update}
-                                    onClick={handleClick}
+                                    onClick={() => handleUpdate(ta.id)}
                                >
                                   Update
                               </EditIcon>
@@ -168,7 +201,7 @@ const GetTA = ({ className, staticContext, ...rest }) => {
       </div>
       <ToastContainer />
     </div>
-  );
-};
-
+    );
+  };
+}
 export default GetTA;
