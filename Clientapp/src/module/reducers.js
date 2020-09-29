@@ -13,7 +13,14 @@ const initialState = {
 };
 
 function logout(state) {
-  sessionStorage.clear("userData");
+  sessionStorage.clear(
+    "username",
+    "token",
+    "isAdmin",
+    "firstName",
+    "lastName",
+    "isLoggedIn"
+  );
   state = {
     ...state,
     ...{
