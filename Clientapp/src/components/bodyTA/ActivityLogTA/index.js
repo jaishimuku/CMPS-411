@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, Container, makeStyles, Button } from "@material-ui/core";
 import Results from "./Results";
 import Toolbar from "./Toolbar";
-import data from "./data";
 import LayoutTA from "../../../Layout/SidebarTA/indexTA";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ActivityLogTA = (props) => {
   const classes = useStyles();
-  const [students] = useState(data);
 
   return (
     <div>
@@ -52,7 +50,7 @@ const ActivityLogTA = (props) => {
               <div className={classes.root}>
                 <Toolbar />
                 <Box mt={3}>
-                  <Results students={students} />
+                  <Results />
                 </Box>
               </div>
             </Container>

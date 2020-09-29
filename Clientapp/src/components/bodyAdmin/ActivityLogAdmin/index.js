@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { Box, Container, makeStyles, Button } from "@material-ui/core";
 import Results from "./Results";
 import Toolbar from "./Toolbar";
-import data from "./data";
 import LayoutAdmin from "../../../Layout/SidebarAdmin/indexAdmin";
-import LayoutTA from "../../../Layout/SidebarTA/indexTA";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ActivityLogAdmin = (props) => {
   const classes = useStyles();
-  const [customers] = useState(data);
 
   return (
     <div>
@@ -53,7 +50,7 @@ const ActivityLogAdmin = (props) => {
               <div className={classes.root} title="Customers">
                 <Toolbar />
                 <Box mt={3}>
-                  <Results customers={customers} />
+                  <Results />
                 </Box>
               </div>
             </Container>
