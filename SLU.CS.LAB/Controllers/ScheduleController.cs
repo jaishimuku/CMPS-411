@@ -24,7 +24,7 @@ namespace SLU.CS.LAB.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Schedule>>> GetSchedule()
         {
-            var result =  await _context.TASchedules.OrderByDescending(x => x.TA).ToListAsync();
+            var result =  await _context.TASchedules.OrderBy(x => x.TA).ToListAsync();
 
             return Ok(result);
         }
