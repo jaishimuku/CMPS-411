@@ -25,7 +25,7 @@ import IconButton from "@material-ui/core/IconButton";
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(6),
   },
   delete: {
     margin: 5,

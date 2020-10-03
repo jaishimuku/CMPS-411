@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, toast } from "react-toastify";
-
 import clsx from "clsx";
 import {
   Box,
@@ -15,7 +14,9 @@ import {
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import baseURL from "../../../baseURL";
-
+import { Dropdown } from "semantic-ui-react";
+import DropdownMenu from "./dropdownMenu";
+import { Container, Header, List } from "semantic-ui-react";
 //import { Search as SearchIcon } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+
 
 const Toolbar = (props) => {
   const [wNumber, setWNumber] = useState("");
@@ -95,7 +98,9 @@ const Toolbar = (props) => {
       .catch((error) => {
         console.error("error:", error);
       });
-  };
+    };
+   
+
 
   return (
     <div>
@@ -131,13 +136,16 @@ const Toolbar = (props) => {
                 label="Name"
                 required
                 onChange={(event) => setName(event.target.value)}
-              />
-              <TextField
-                id="standard-textarea"
-                label="Course"
-                required
-                onChange={(event) => setCourse(event.target.value)}
-              />
+                 />
+
+                          {/*  <Dropdown
+                              id="standard-textarea"
+                              label="Course"
+                               placeholder="Select Class"
+                               required
+                              onChange={(event) => setCourse(event.target.value)}
+                            />*/}
+             <DropdownMenu />
               <TextField
                 id="standard-textarea"
                 label="Topic"
