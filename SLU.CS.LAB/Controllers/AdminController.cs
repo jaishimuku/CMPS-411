@@ -34,6 +34,16 @@ namespace SLU.CS.LAB.Controllers
             var result = await _context.Users.Where(x => x.IsAdmin == false).ToListAsync();
             return Ok(result);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteTA(int id)

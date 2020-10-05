@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { ToastContainer } from "react-toastify";
+import { Redirect } from "react-router-dom";
 import {
   Box,
   Button,
@@ -22,7 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import baseURL from "../../baseURL";
 import LayoutAdmin from "../../Layout/SidebarAdmin/indexAdmin";
-import { Redirect } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -64,17 +65,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GetTA = ({ className, staticContext, ...rest }) => {
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [tiers, setTiers] = useState([]);
   const [hasError, setErrors] = useState(false);
   const data = JSON.parse(JSON.stringify(tiers));
   const classes = useStyles();
 
-  async function fetchData() {
-    const res = await fetch(`${baseURL}/api/admin`);
-    res
-      .json()
+   function fetchData() {
+     fetch(`${baseURL}/api/admin`)
+      .then((response) => { return response.json()})
       .then((res) => setTiers(res))
       .catch((err) => setErrors(err));
   }
@@ -86,15 +86,27 @@ const GetTA = ({ className, staticContext, ...rest }) => {
     setIsLoaded(true);
     console.log("hello");
   };
+
   function handleClick(id) {
     fetch(`${baseURL}/api/Admin/` + id, {
       method: "DELETE",
     }).catch((err) => console.error(err));
   }
 
+  function handleUpdate (id) {
+    fetch(`${baseURL}/api/Admin/` + id)
+    .then( (response) => { return response.json() })
+    .then ( (updateUserInfo) => { sessionStorage.setItem('updateUserInfo',  JSON.stringify(updateUserInfo)); setShowEdit(true);console.log(updateUserInfo)})
+    .catch((err) => console.error(err));
+  }
+
   if (isLoaded) {
     return <Redirect to="addTA" />;
-  } else
+  }
+  if (showEdit){
+    return <Redirect to = "editTA"/>
+  }
+   
     return (
       <div>
         <div className={classes.wrapper}>
@@ -157,10 +169,10 @@ const GetTA = ({ className, staticContext, ...rest }) => {
                                 <IconButton>
                                   <EditIcon
                                     className={classes.update}
-                                    onClick={handleClick}
+                                    onClick={() => handleUpdate(ta.id)}
                                   >
                                     Update
-                                  </EditIcon>
+                                  </EditIcon> 
                                 </IconButton>
                               </TableCell>
                             </TableRow>
@@ -177,6 +189,6 @@ const GetTA = ({ className, staticContext, ...rest }) => {
         <ToastContainer />
       </div>
     );
-};
+  }
 
 export default GetTA;
