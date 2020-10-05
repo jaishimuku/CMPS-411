@@ -31,23 +31,23 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/dashboardta/schedule",
-    icon: UsersIcon,
+    href: "/dashboardta/scheduleTA",
+    icon: CalendarIcon,
     title: "Schedule",
   },
   {
     href: "/dashboardta/ticketsTA",
-    icon: CalendarIcon,
+    icon: AlertCircleIcon,
     title: "Tickets",
   },
   {
     href: "/dashboardta/welcome",
-    icon: AlertCircleIcon,
+    icon: MessageIcon,
     title: "Message",
   },
   {
     href: "/dashboardta/activityLogTA",
-    icon: MessageIcon,
+    icon: UsersIcon,
     title: "Visit Log",
   },
   {
