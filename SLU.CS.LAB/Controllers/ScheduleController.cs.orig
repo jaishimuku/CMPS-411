@@ -25,6 +25,10 @@ namespace SLU.CS.LAB.Controllers
         [HttpGet]
         public ActionResult<List<ScheduleDto>> GetSchedule()
         {
+<<<<<<< Updated upstream
+            var result =  await _context.TASchedules.OrderBy(x => x.TA).ToListAsync();
+=======
+>>>>>>> Stashed changes
 
             var rows =  _context.TASchedules.ToList().GroupBy(x => x.Time).ToList();
 
@@ -102,6 +106,7 @@ namespace SLU.CS.LAB.Controllers
         [HttpPost]
         public ActionResult populateSchedule()
         {    //added objects like this to keep it in order so that the frontend renders in correct format
+            var schedule = new List<Schedule>();
             
             var row1 = new Schedule(){ Days = DayOfWeek.Sunday, Time = "9:00AM-10:00AM", TA=""};
             _context.Add(row1);

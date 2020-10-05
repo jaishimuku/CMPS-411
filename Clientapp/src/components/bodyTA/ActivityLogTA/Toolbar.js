@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   color: {
     margin: 20,
+    height: 50,
+    width:100,
     background: "#2f6b25",
     color: "white",
     "&:hover": {
@@ -44,8 +46,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-
 
 const Toolbar = (props) => {
   const [wNumber, setWNumber] = useState("");
@@ -98,9 +98,7 @@ const Toolbar = (props) => {
       .catch((error) => {
         console.error("error:", error);
       });
-    };
-   
-
+  };
 
   return (
     <div>
@@ -108,7 +106,7 @@ const Toolbar = (props) => {
         <CardContent>
           <ToastContainer />
 
-          <Box maxWidth={1200}>
+          <Box maxWidth={1000}>
             {/* <TextField
                 fullWidth
                 InputProps={{
@@ -136,16 +134,22 @@ const Toolbar = (props) => {
                 label="Name"
                 required
                 onChange={(event) => setName(event.target.value)}
-                 />
+              />
+              {/* <TextField
+                id="standard-textarea"
+                label="Course"
+                required
+                onChange={(event) => setCourse(event.target.value)}
+              /> */}
 
-                          {/*  <Dropdown
+              {/*  <Dropdown
                               id="standard-textarea"
                               label="Course"
                                placeholder="Select Class"
                                required
                               onChange={(event) => setCourse(event.target.value)}
                             />*/}
-             <DropdownMenu />
+              <DropdownMenu />
               <TextField
                 id="standard-textarea"
                 label="Topic"

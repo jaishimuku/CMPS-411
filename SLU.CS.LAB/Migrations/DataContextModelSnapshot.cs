@@ -65,8 +65,8 @@ namespace SLU.CS.LAB.Migrations
                     b.Property<string>("TA")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
