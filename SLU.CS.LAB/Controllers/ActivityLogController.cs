@@ -73,6 +73,21 @@ namespace SLU.CS.LAB.Controllers
             return Ok();
         }
 
+        [HttpPost("{firstName}")]
+        public  ActionResult AllTimeOutWhenLogOut(string firstName) {
+
+          var studentsOfTA =  _context.ActivityLogs.Where(x => x.Tutor == firstName).ToList();
+
+            foreach (var item in studentsOfTA) { 
+                item.TimeOut = DateTime.Now; 
+            }
+
+            _context.SaveChanges();
+
+            return Ok();
+
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<ActivityLog>> DeleteActivity(int id)
         {
