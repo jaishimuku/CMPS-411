@@ -20,6 +20,8 @@ import DropdownMenu from "./dropdownMenu";
 import { Container, Header, List } from "semantic-ui-react";
 //import { Search as SearchIcon } from "react-feather";
 
+import './Dropdown.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -66,8 +68,8 @@ const classOptions = [
   },
   {
     key: "CMPS 390",
-    text: "CMPS 290",
-    value: "CMPS 290",
+    text: "CMPS 390",
+    value: "CMPS 390",
   },
 ];
 const Toolbar = (props) => {
@@ -173,9 +175,9 @@ const Toolbar = (props) => {
                 onChange={(event) => setCourse(event.target.value)}
               /> */}
               {/* <DropdownMenu /> */}
-
-              <Dropdown
-                placeholder="Select a Class"
+              <Container style={{ margin: 30, width: 500}}>
+              <Dropdown 
+                placeholder="Select Class"
                 fluid
                 selection
                 options={classOptions}
@@ -183,6 +185,7 @@ const Toolbar = (props) => {
                   setCourse(data.value);
                 }}
               />
+              </Container>
               <TextField
                 id="standard-textarea"
                 label="Topic"
