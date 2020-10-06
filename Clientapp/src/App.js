@@ -18,6 +18,7 @@ import getTicketsTA from "./components/bodyTA/getTicketsTA/index";
 import ActivityLogAdmin from "./components/bodyAdmin/ActivityLogAdmin/index";
 import ActivityLogTA from "./components/bodyTA/ActivityLogTA/index";
 import getScheduleGrid from "./components/bodyTA/Schedule/index.txt";
+import editTA from "./components/bodyAdmin/editTA";
 import scheduleAdmin from "./components/bodyAdmin/scheduleAdmin";
 import scheduleTA from "./components/bodyTA/scheduleTA";
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path={`${url}/welcome`} component={WelcomeAdmin} />
                 <Route path={`${url}/getTA`} component={GetTA} />
                 <Route path={`${url}/addTA`} component={CreateTA} />
+                <Route path={`${url}/editTA`} component={editTA} />
                 <Route
                   path={`${url}/ticketsAdmin`}
                   component={getTicketsAdmin}
