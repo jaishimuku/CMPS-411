@@ -15,6 +15,7 @@ import {
 import { connect } from "react-redux";
 import baseURL from "../../../baseURL";
 import { Dropdown } from "semantic-ui-react";
+
 import DropdownMenu from "./dropdownMenu";
 import { Container, Header, List } from "semantic-ui-react";
 //import { Search as SearchIcon } from "react-feather";
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   color: {
     margin: 20,
     height: 50,
-    width:100,
+    width: 100,
     background: "#2f6b25",
     color: "white",
     "&:hover": {
@@ -47,6 +48,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const classOptions = [
+  {
+    key: "CMPS 161 ",
+    text: "CMPS 161",
+    value: "CMPS 161",
+  },
+  {
+    key: "CMPS 280",
+    text: "CMPS 280",
+    value: "CMPS 280",
+  },
+  {
+    key: "CMPS 290",
+    text: "CMPS 290",
+    value: "CMPS 290",
+  },
+  {
+    key: "CMPS 390",
+    text: "CMPS 290",
+    value: "CMPS 290",
+  },
+];
 const Toolbar = (props) => {
   const [wNumber, setWNumber] = useState("");
   const [name, setName] = useState("");
@@ -142,14 +165,24 @@ const Toolbar = (props) => {
                 onChange={(event) => setCourse(event.target.value)}
               /> */}
 
-              {/*  <Dropdown
-                              id="standard-textarea"
-                              label="Course"
-                               placeholder="Select Class"
-                               required
-                              onChange={(event) => setCourse(event.target.value)}
-                            />*/}
-              <DropdownMenu />
+              {/* <Dropdown
+                id="standard-textarea"
+                label="Course"
+                placeholder="Select Class"
+                required
+                onChange={(event) => setCourse(event.target.value)}
+              /> */}
+              {/* <DropdownMenu /> */}
+
+              <Dropdown
+                placeholder="Select a Class"
+                fluid
+                selection
+                options={classOptions}
+                onChange={(event, data) => {
+                  setCourse(data.value);
+                }}
+              />
               <TextField
                 id="standard-textarea"
                 label="Topic"
