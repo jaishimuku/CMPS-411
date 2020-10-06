@@ -52,6 +52,27 @@ namespace SLU.CS.LAB.Migrations
                     b.ToTable("ActivityLogs");
                 });
 
+            modelBuilder.Entity("SLU.CS.LAB.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TASchedules");
+                });
+
             modelBuilder.Entity("SLU.CS.LAB.Models.User", b =>
                 {
                     b.Property<int>("Id")

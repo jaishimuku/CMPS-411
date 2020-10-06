@@ -77,5 +77,16 @@ namespace SLU.CS.LAB.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
     }
 }

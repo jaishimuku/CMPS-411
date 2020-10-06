@@ -10,8 +10,8 @@ using SLU.CS.LAB.Data;
 namespace SLU.CS.LAB.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200928150029_ActivitylogTimeOut")]
-    partial class ActivitylogTimeOut
+    [Migration("20201004024401_changed date time to string")]
+    partial class changeddatetimetostring
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,6 +52,27 @@ namespace SLU.CS.LAB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ActivityLogs");
+                });
+
+            modelBuilder.Entity("SLU.CS.LAB.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TASchedules");
                 });
 
             modelBuilder.Entity("SLU.CS.LAB.Models.User", b =>

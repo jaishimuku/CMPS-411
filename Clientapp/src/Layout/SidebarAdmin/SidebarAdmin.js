@@ -41,7 +41,7 @@ const items = [
     title: "TAs",
   },
   {
-    href: "/dashboardadmin/welcome",
+    href: "/dashboardadmin/scheduleAdmin",
     icon: CalendarIcon,
     title: "Schedule",
   },

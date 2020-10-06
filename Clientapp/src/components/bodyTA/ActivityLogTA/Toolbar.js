@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, toast } from "react-toastify";
-
 import clsx from "clsx";
 import {
   Box,
@@ -15,7 +14,9 @@ import {
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import baseURL from "../../../baseURL";
-
+import { Dropdown } from "semantic-ui-react";
+import DropdownMenu from "./dropdownMenu";
+import { Container, Header, List } from "semantic-ui-react";
 //import { Search as SearchIcon } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   color: {
     margin: 20,
+    height: 50,
+    width:100,
     background: "#2f6b25",
     color: "white",
     "&:hover": {
@@ -103,7 +106,7 @@ const Toolbar = (props) => {
         <CardContent>
           <ToastContainer />
 
-          <Box maxWidth={1200}>
+          <Box maxWidth={1000}>
             {/* <TextField
                 fullWidth
                 InputProps={{
@@ -132,12 +135,21 @@ const Toolbar = (props) => {
                 required
                 onChange={(event) => setName(event.target.value)}
               />
-              <TextField
+              {/* <TextField
                 id="standard-textarea"
                 label="Course"
                 required
                 onChange={(event) => setCourse(event.target.value)}
-              />
+              /> */}
+
+              {/*  <Dropdown
+                              id="standard-textarea"
+                              label="Course"
+                               placeholder="Select Class"
+                               required
+                              onChange={(event) => setCourse(event.target.value)}
+                            />*/}
+              <DropdownMenu />
               <TextField
                 id="standard-textarea"
                 label="Topic"

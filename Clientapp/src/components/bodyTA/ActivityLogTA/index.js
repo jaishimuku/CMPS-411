@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { Box, Container, makeStyles, Button } from "@material-ui/core";
 import Results from "./Results";
 import Toolbar from "./Toolbar";
 import LayoutTA from "../../../Layout/SidebarTA/indexTA";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: "flex",
     flex: "1 1 auto",
-    overflow: "hidden",
+    overflow: "visible",
     paddingTop: 64,
     [theme.breakpoints.up("lg")]: {
       paddingLeft: 256,
@@ -23,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     display: "flex",
     flex: "1 1 auto",
-    overflow: "hidden",
+    overflow: "visible",
   },
   content: {
     flex: "1 1 auto",
     height: "100%",
-    overflow: "auto",
+    overflow: "visible",
   },
   title: {
     textAlign: "center",
