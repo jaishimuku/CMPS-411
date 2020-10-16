@@ -41,13 +41,7 @@ const NotFoundView = () => {
             </svg>
           </Typography>
 
-          <Box textAlign="center">
-            <img
-              alt="Under development"
-              className={classes.image}
-              src={Image}
-            />
-          </Box>
+         
         </Container>
       </Box>
     </div>

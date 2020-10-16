@@ -61,6 +61,38 @@ namespace SLU.CS.LAB.Controllers
             return result;
         }
 
+        [HttpGet("{current}")]
+        public ActionResult GetCurrentWorkers() {
+
+            var currentTime = DateTime.Now.ToLongTimeString();
+            var currentDay = (int)DateTime.Now.DayOfWeek;
+            //var currentDay = 2;
+            var temp = currentTime.Substring(0, 2);   //extracts first two characters of time
+
+            var scheduleOfToday = _context.TASchedules.Where(x => (int)x.Days == currentDay).ToList();
+            var timeToReturn = "";
+            var TAToReturn = "";
+
+            foreach (var cell in scheduleOfToday) {
+                if (cell.Time.Substring(0, 2) == temp)
+                {
+                    timeToReturn = cell.Time;
+                    TAToReturn = cell.TA;
+                }
+            } 
+            //if testing in time and day other than in our database , returns data below for now
+            if (timeToReturn == "" && TAToReturn == "") {
+                timeToReturn = "12:00PM-1:00PM";
+                TAToReturn = "Mukunda, Roshan";
+            }
+
+            return Ok(
+                new { 
+                timeToReturn,
+                TAToReturn
+                });
+
+        }
         
 
         [HttpPut]
@@ -97,94 +129,6 @@ namespace SLU.CS.LAB.Controllers
 
             return Ok();
         
-        }
-
-        [HttpPost]
-        public ActionResult populateSchedule()
-        {    //added objects like this to keep it in order so that the frontend renders in correct format
-            
-            var row1 = new Schedule(){ Days = DayOfWeek.Sunday, Time = "9:00AM-10:00AM", TA=""};
-            _context.Add(row1);
-            _context.SaveChanges();
-
-            var row2 = new Schedule(){ Days = DayOfWeek.Sunday, Time = "10:00AM-11:00AM", TA = "" };
-               _context.Add(row2);
-            _context.SaveChanges();
-
-            var row3 = new Schedule() { Days = DayOfWeek.Sunday, Time = "11:00AM-12:00PM", TA = "" };
-            _context.Add(row3);
-            _context.SaveChanges();
-
-            var row4 = new Schedule() { Days = DayOfWeek.Sunday, Time = "12:00PM-1:00PM", TA = "" };
-            _context.Add(row4);
-            _context.SaveChanges();
-
-            var row5 = new Schedule() { Days = DayOfWeek.Sunday, Time = "1:00PM-2:00PM", TA = "" };
-            _context.Add(row5);
-            _context.SaveChanges();
-
-            var row6 = new Schedule() { Days = DayOfWeek.Monday, Time = "9:00AM-10:00AM", TA = "" };
-            _context.Add(row6);
-            _context.SaveChanges();
-
-            var row7 = new Schedule() { Days = DayOfWeek.Monday, Time = "10:00AM-11:00AM", TA = "" };
-            _context.Add(row7);
-            _context.SaveChanges();
-
-            var row8 = new Schedule() { Days = DayOfWeek.Monday, Time = "11:00AM-12:00PM", TA = "" };
-            _context.Add(row8);
-            _context.SaveChanges();
-
-            var row9 = new Schedule() { Days = DayOfWeek.Monday, Time = "12:00PM-1:00PM", TA = "" };
-            _context.Add(row9);
-            _context.SaveChanges();
-
-            var row10 = new Schedule() { Days = DayOfWeek.Monday, Time = "1:00PM-2:00PM", TA = "" };
-            _context.Add(row10); 
-            _context.SaveChanges();
-
-            var row11 = new Schedule() { Days = DayOfWeek.Tuesday, Time = "9:00AM-10:00AM", TA = "" };
-            _context.Add(row11);
-            _context.SaveChanges();
-
-            var row12 = new Schedule() { Days = DayOfWeek.Tuesday, Time = "10:00AM-11:00AM", TA = "" };
-            _context.Add(row12);
-            _context.SaveChanges();
-
-            var row13 = new Schedule() { Days = DayOfWeek.Tuesday, Time = "11:00AM-12:00PM", TA = "" };
-            _context.Add(row13);
-            _context.SaveChanges();
-
-            var row14 = new Schedule() { Days = DayOfWeek.Tuesday, Time = "12:00PM-1:00PM", TA = "" };
-            _context.Add(row14);
-            _context.SaveChanges();
-
-            var row15 = new Schedule() { Days = DayOfWeek.Tuesday, Time = "1:00PM-2:00PM", TA = "" };
-            _context.Add(row15);
-            _context.SaveChanges();
-
-            var row16 = new Schedule() { Days = DayOfWeek.Wednesday, Time = "9:00AM-10:00AM", TA = "" };
-            _context.Add(row16);
-            _context.SaveChanges();
-
-            var row17 = new Schedule() { Days = DayOfWeek.Wednesday, Time = "10:00AM-11:00AM", TA = "" };
-            _context.Add(row17);
-            _context.SaveChanges();
-
-            var row18 = new Schedule() { Days = DayOfWeek.Wednesday, Time = "11:00AM-12:00PM", TA = "" };
-            _context.Add(row18);
-            _context.SaveChanges();
-
-            var row19 = new Schedule() { Days = DayOfWeek.Wednesday, Time = "12:00PM-1:00PM", TA = "" };
-            _context.Add(row19);
-            _context.SaveChanges();
-
-            var row20 = new Schedule() { Days = DayOfWeek.Wednesday, Time = "1:00PM-2:00PM", TA = "" };
-            _context.Add(row20); 
-             _context.SaveChanges();
-
-            return Ok();
-
         }
     }
 }
