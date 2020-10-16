@@ -61,7 +61,7 @@ namespace SLU.CS.LAB.Controllers
             return result;
         }
 
-        [HttpGet("{current}")]
+        [HttpGet("current")]
         public ActionResult GetCurrentWorkers() {
 
             var currentTime = DateTime.Now.ToLongTimeString();
