@@ -22,6 +22,7 @@ import editTA from "./components/bodyAdmin/editTA";
 import { connect } from "react-redux";
 import scheduleAdmin from "./components/bodyAdmin/scheduleAdmin";
 import scheduleTA from "./components/bodyTA/scheduleTA";
+import { LogIn } from "react-feather";
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
@@ -138,7 +139,7 @@ const App = (props) => {
             />
           )}
           <Route path="/logout" component={Logout} />
-          <Route component={NotFoundView} />
+          <Route component={Login} />
         </Switch>
       </Router>
     </ThemeProvider>

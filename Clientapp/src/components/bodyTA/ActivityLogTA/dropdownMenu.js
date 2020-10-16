@@ -19,9 +19,9 @@ const classOptions = [
   },
   {
     key: "CMPS 390",
-    text: "CMPS 390",
-    value: "CMPS 390",
-  }
+    text: "CMPS 290",
+    value: "CMPS 290",
+  },
 ];
 
 const styleLink = document.createElement("link");

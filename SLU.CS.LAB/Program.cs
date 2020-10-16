@@ -25,6 +25,7 @@ namespace SLU.CS.LAB
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
                     Seed.SeedUser(context);
+                    Seed.SeedSchedule(context);
                 }
                 catch (Exception ex)
                 {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import moment from "moment";
+import { connect } from "react-redux";
+
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Avatar,
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Results = () => {
+const Results = (props) => {
   const classes = useStyles();
   const [selectedStudentIds, setSelectedStudentIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -209,7 +211,7 @@ const Results = () => {
                     moment(student.timeOut).format("MM/DD h:mm a") ? (
                       moment(student.timeOut).format("MM/DD h:mm a")
                     ) : (
-                      <Button
+                      student.tutor === props.val.firstName?<Button
                         className={classes.color}
                         variant="contained"
                         style={{ margin: 20 }}
@@ -217,18 +219,35 @@ const Results = () => {
                         onClick={() => timeOut(student.id)}
                       >
                         OUT
+                      </Button>:<Button
+                        className={classes.color}
+                        disabled={true}
+                        variant="contained"
+                        style={{ margin: 20 }}
+                        size="small"
+                      >
+                        OUT
                       </Button>
+                      
                     )}
                   </TableCell>
                   <TableCell>
-                    <IconButton>
+                  {student.tutor === props.val.firstName?<IconButton>
                       <DeleteIcon
                         className={classes.delete}
                         onClick={() => deleteLog(student.id)}
                       >
                         Delete
                       </DeleteIcon>
-                    </IconButton>
+                    </IconButton>:<IconButton>
+                      <DeleteIcon
+                        disabled={true}
+                      >
+                        Delete
+                      </DeleteIcon>
+                    </IconButton>}
+
+                    
                   </TableCell>
                 </TableRow>
               ))}
@@ -249,4 +268,10 @@ const Results = () => {
   );
 };
 
-export default Results;
+
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
+};
+export default connect(mapStateToProps, null)(Results);

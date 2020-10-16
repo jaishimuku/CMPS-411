@@ -5,7 +5,10 @@ import {
   Typography,
   CardContent,
   Grid,
+  Paper
 } from "@material-ui/core";
+import Store from "@material-ui/icons/Store";
+
 import { useDispatch, connect } from "react-redux";
 
 import Container from "@material-ui/core/Container";
@@ -44,6 +47,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
     margin: 15,
+  },
+  paper: {
+    marginTop:20,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -89,6 +98,11 @@ const WelcomeAdmin = (props) => {
                   </Typography>
                 </CardContent>
               </Card>
+              <Grid container spacing={3}>
+              <Grid item xs={6}>
+          <Paper className={classes.paper}>Working TAs</Paper>
+        </Grid>
+        </Grid>
             </Container>
           </div>
         </div>
