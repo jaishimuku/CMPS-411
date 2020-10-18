@@ -13,5 +13,7 @@ namespace SLU.CS.LAB.Data
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<Schedule> TASchedules { get; set; }
 
+        public DbSet<Ticket> Tickets { get; set; }
+
     }
 }
