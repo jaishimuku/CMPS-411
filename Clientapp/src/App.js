@@ -14,7 +14,7 @@ import GetTA from "./components/bodyAdmin/GetTA";
 import Logout from "./components/auth/Logout";
 import NotFoundView from "./components/error";
 import getTicketsAdmin from "./components/bodyAdmin/getTicketsAdmin/index";
-import getTicketsTA from "./components/bodyTA/getTicketsTA/index";
+import getTicketsTA from "./components/bodyTA/getTicketsTA/CreateTicket";
 import ActivityLogAdmin from "./components/bodyAdmin/ActivityLogAdmin/index";
 import ActivityLogTA from "./components/bodyTA/ActivityLogTA/index";
 import getScheduleGrid from "./components/bodyTA/Schedule/index.txt";
