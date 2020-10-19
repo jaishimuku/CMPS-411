@@ -26,6 +26,10 @@ import 'mdbreact/dist/css/mdb.css'
 import LayoutTA from "../../Layout/SidebarTA/indexTA";
 import { loginMsg } from "../../module/actions";
 import baseURL from "../../baseURL";
+import ScheduleIcon from "@material-ui/icons/Schedule";
+import DoneAllIcon from "@material-ui/icons/DoneAll";
+import {Link} from "react-router-dom";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,15 +57,15 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     overflow: "auto",
   },
+  title: {
+    textAlign: "center",
+    margin: 15,
+  },
   paper: {
     marginTop:20,
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-  },
-  title: {
-    textAlign: "center",
-    margin: 15,
   },
   contents: {
     padding: '5px 10px',
@@ -71,19 +75,20 @@ const useStyles = makeStyles((theme) => ({
   },
   number: {
     display: 'block',
-     fontWeight: "medium",
-    fontSize: 18,
+    fontWeight: "medium",
+    fontSize: 15,
     color: "grey"
   },
   text: {
-    fontSize: 20,
-     fontWeight: 'normal',
+    fontSize: 15,
+    fontWeight: 'normal',
     color: "black"
   },
   iconSpan: {
     float: 'left',
     height: 90,
-    width: 90,
+    width: 140,
+    margin: 28,
     textAlign: 'center',
     backgroundColor: "white"
   },
@@ -93,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%'
 
   }
+
 }));
 
 const WelcomeTA = (props) => {
@@ -116,9 +122,9 @@ const WelcomeTA = (props) => {
 
   const fetchTA = () => {
     fetch(`${baseURL}/api/Schedule/current`)
-      .then((response) => response.json())
-      .then((res) => setTa(res))
-      .catch((error) => console.log(error));
+        .then((response) => response.json())
+        .then((res) => setTa(res))
+        .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -126,60 +132,95 @@ const WelcomeTA = (props) => {
   });
 
   return (
-    <div>
-      {props.val.loginMsg === true &&
+      <div>
+        {props.val.loginMsg === true &&
         toast.success("Login Successful", toastProp) &&
         hideMsg()}
-      <ToastContainer />
-      <LayoutTA />
-      <div className={classes.wrapper}>
-        <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            <Container className={classes.root}>
-              <Card>
-                <CardContent>
-                  <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    variant="h1"
-                    gutterBottom
-                  >
-                    Welcome {props.val.firstName}!
-                  </Typography>
-                </CardContent>
-              </Card>
-              <MDBContainer style={{marginRight:20}}>
-            <MDBRow>
-                <MDBCol xs="5">
+        <ToastContainer />
+        <LayoutTA />
+        <div className={classes.wrapper}>
+          <div className={classes.contentContainer}>
+            <div className={classes.content}>
+              <Container className={classes.root}>
+                <Card>
+                  <CardContent>
+                    <Typography
+                        className={classes.title}
+                        color="textSecondary"
+                        variant="h1"
+                        gutterBottom
+                    >
+                      Welcome {props.val.firstName}!
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <MDBContainer style={{marginRight:40}}>
+                  <MDBRow>
+                    <MDBCol lg="5" style={{marginRight:100}}>
 
-                    <MDBCard style={{backgroundColor:'white', marginTop:90}}>
+                      <MDBCard style={{backgroundColor:'white', marginTop:90}}>
                         <MDBCardHeader className="form-header font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20, backgroundColor: "#ffa500" }}>
-                            <h3 className="my-3 text-left text-white">
-                                Currently Working TAS
-                            </h3>
+                          <h3 className="my-3 text-left text-white">
+                            Currently Working TAS
+                          </h3>
                         </MDBCardHeader>
                         <MDBCardBody>
-                        {/* <Paper> */}
-        <div className={classes.iconSpan}>
-          <GroupIcon color="primary"
-                className={classes.icon}
-          />
-          <span className={classes.text}>{tas.taToReturn}</span>
-        </div>
-        <div className={classes.contents}>
-          <span className={classes.number}>{tas.timeToReturn}</span>
-        </div>
-      {/* </Paper> */}
+                          {/* <Paper> */}
+                          <div className={classes.iconSpan}>
+                            <ScheduleIcon color="primary"
+                                          className={classes.icon}
+                            />
+                            <span className={classes.number}>{tas.timeToReturn}</span>
+                          </div>
+
+                          <div className={classes.iconSpan}>
+                            <GroupIcon color="primary"
+                                       className={classes.icon}
+                            />
+                            <br/>
+                            <span className={classes.text}>{tas.taToReturn}</span>
+                          </div>
+                          {/* </Paper> */}
                         </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
-            </Container>
+                      </MDBCard>
+                    </MDBCol>
+
+                    <MDBCol lg="5">
+
+                      <MDBCard style={{backgroundColor:'white', marginTop:90}}>
+                        <MDBCardHeader className="form-header font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20, backgroundColor: "#ffa500" }}>
+                          <h3 className="my-3 text-left text-white">
+                            Status Of Tickets
+                          </h3>
+                        </MDBCardHeader>
+                        <MDBCardBody>
+                          {/* <Paper> */}
+                          <div className={classes.iconSpan}>
+                            <DoneAllIcon color="primary"
+                                         className={classes.icon}
+                            />
+                            <span className={classes.number}>Resolved: <strong>10</strong></span>
+                          </div>
+
+                          <Link to="/ticketsAdmin">
+                            <div className={classes.iconSpan}>
+                              <ClearIcon color="error"
+                                         className={classes.icon}
+                              />
+                              <br/>
+                              <span className={classes.text} style={{color:'red'}}>Unresolved: <strong>5</strong></span>
+                            </div>
+                          </Link>
+                        </MDBCardBody>
+                      </MDBCard>
+                    </MDBCol>
+                  </MDBRow>
+                </MDBContainer>
+              </Container>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
