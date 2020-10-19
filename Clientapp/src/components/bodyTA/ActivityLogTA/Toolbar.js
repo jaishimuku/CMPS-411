@@ -22,7 +22,7 @@ import { Container, Header, List } from "semantic-ui-react";
 
 import './Dropdown.css';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(2),
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 20,
     height: 50,
     width: 100,
-    background: "#2f6b25",
+    background: "green",
     color: "white",
     "&:hover": {
       background: "#ffa500",

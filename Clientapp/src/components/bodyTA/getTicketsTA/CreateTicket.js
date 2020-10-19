@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -12,31 +12,20 @@ import {
     MDBBtn,
     MDBInput
 } from "mdbreact";
-import { ToastContainer, toast } from "react-toastify";
-import {makeStyles} from "@material-ui/core";
 
-
+import {Button, makeStyles} from "@material-ui/core";
 
 import LayoutTA from "../../../Layout/SidebarTA/indexTA";
-const useStyles = makeStyles((theme) => ({
-    color: {
-        margin: 20,
-        height: 50,
-        width: 100,
-        background: "#2f6b25",
-        color: "white",
-        "&:hover": {
-            background: "#ffa500",
-            color: "white",
-        },
-    },
-}));
+import baseURL from "../../../baseURL";
+import { ToastContainer, toast } from "react-toastify";
+import {useStyles} from "../ActivityLogTA/Toolbar";
 
 const CreateTicket = () => {
-
-
-
-
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [isResolved, setIsResolved] = useState(false);
+    const [submittedBy, setSubmittedBy] = useState("");
+    const classes = useStyles();
 
     let toastProp = {
         position: "bottom-center",
@@ -49,13 +38,35 @@ const CreateTicket = () => {
     };
 
     const submitData = () => {
-        toast.success("Ticket Successfully submitted", toastProp);
+        const  FormData = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(
+                {
+                    title: title,
+                    description: description,
+                    isResolved: isResolved,
+                    submittedBy: submittedBy,
+                })
+        }
+
+        fetch(`${baseURL}/api/Ticket`,FormData )
+            .then((response) => {
+                        if (response.ok) {
+                            toast.success("Ticket Successfully Added", toastProp);
+                            return response.json();
+                        } else {
+                            toast.error("Error!", toastProp);
+                        }
+                    })
+            .catch((err) => (err));
     }
+
     return (
         <div>
-            <ToastContainer />
-            <LayoutTA/>
+        <LayoutTA/>
         <MDBContainer style={{marginRight:20}}>
+            <ToastContainer/>
             <MDBRow>
                 <MDBCol md="10">
 
@@ -69,36 +80,42 @@ const CreateTicket = () => {
                             <form>
                                 <div className="grey-text" style={{color:"green"}}>
                                     <MDBInput
-                                        style={{width:300, marginTop: 25}}
+                                        style={{width:300, marginTop: 25,}}
                                         label="Title"
                                         type="text"
+                                        onChange={(event)=>setTitle(event.target.value)}
+                                        required
                                     />
 
                                     <MDBInput
                                         type="textarea"
                                         rows="8"
                                         label="Description"
+                                        onChange={(event)=>setDescription(event.target.value)}
+                                        required
                                     />
 
                                     <MDBInput
                                         style={{width:300, marginTop: 25}}
                                         label="Submitted By"
                                         type="text"
+                                        onChange={(event)=>setSubmittedBy(event.target.value)}
+                                        required
                                     />
 
                                 </div>
 
-                                <div className="text-left mt-4">
-                                    <MDBBtn
-                                        color="green"
-                                        className="mb-3"
-                                        type="button"
-                                        onClick={submitData}
-                                    >
-
-                                        Submit
-                                    </MDBBtn>
-                                </div>
+                                <Button
+                                    variant="contained"
+                                    className={classes.color}
+                                    size="large"
+                                    type="submit"
+                                    onClick={() => {
+                                        submitData();
+                                    }}
+                                >
+                                    Submit
+                                </Button>
                             </form>
                         </MDBCardBody>
                     </MDBCard>
