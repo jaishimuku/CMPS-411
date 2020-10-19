@@ -51,7 +51,7 @@ const items = [
     title: "Tickets",
   },
   {
-    href: "/dashboardadmin/welcome",
+    href: "/dashboardadmin/messages",
     icon: MessageIcon,
     title: "Messages",
   },

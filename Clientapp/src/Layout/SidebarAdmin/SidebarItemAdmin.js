@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     width: "100%",
     "&:hover": {
-      background: "#fac35f",
+      // backgroundColor: "#D3D3D3",
       color: "green",
     },
   },
@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 
   active: {
     color: theme.palette.primary.main,
+    backgroundColor: "#fac35f !important",
+    
     "& $title": {
       fontWeight: theme.typography.fontWeightMedium,
     },
