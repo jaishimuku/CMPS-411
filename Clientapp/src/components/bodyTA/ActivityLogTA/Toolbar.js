@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
   color: {
     margin: 20,
     height: 50,
-    width: 100,
+    width: 150,
     background: "green",
     color: "white",
     "&:hover": {

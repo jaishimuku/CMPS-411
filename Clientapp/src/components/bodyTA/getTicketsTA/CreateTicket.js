@@ -14,18 +14,21 @@ import {
 } from "mdbreact";
 
 import {Button, makeStyles} from "@material-ui/core";
+import { Redirect } from "react-router";
 
 import LayoutTA from "../../../Layout/SidebarTA/indexTA";
 import baseURL from "../../../baseURL";
 import { ToastContainer, toast } from "react-toastify";
 import {useStyles} from "../ActivityLogTA/Toolbar";
+import {Link, Route} from "react-router-dom";
+import getTicketsTA from "./getTATickents";
 
 const CreateTicket = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isResolved, setIsResolved] = useState(false);
     const [submittedBy, setSubmittedBy] = useState("");
-    const [submittedAt, setAubmittedAt] = useState();
+    const [submittedAt, setSubmittedAt] = useState();
     const classes = useStyles();
 
     let toastProp = {
@@ -54,76 +57,78 @@ const CreateTicket = () => {
 
         fetch(`${baseURL}/api/Ticket`,FormData )
             .then((response) => {
-                        if (response.ok) {
-                            toast.success("Ticket Successfully Added", toastProp);
-                            return response.json();
-                        } else {
-                            toast.error("Error!", toastProp);
-                        }
-                    })
+                if (response.ok) {
+                    toast.success("Ticket Successfully Added", toastProp);
+                    return response.json();
+                } else {
+                    toast.error("Error!", toastProp);
+                }
+            })
             .catch((err) => (err));
     }
 
     return (
         <div>
-        <LayoutTA/>
-        <MDBContainer style={{marginRight:20}}>
-            <ToastContainer/>
-            <MDBRow>
-                <MDBCol md="10">
+            <LayoutTA/>
+            <MDBContainer style={{marginRight:20}}>
+                <ToastContainer/>
+                <MDBRow>
+                    <MDBCol md="10">
 
-                    <MDBCard style={{backgroundColor:'white', marginTop:150}}>
-                        <MDBCardHeader className="form-header font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20, backgroundColor:'green'}}>
-                            <h3 className="my-3 text-left text-white">
-                                Add Ticket
-                            </h3>
-                        </MDBCardHeader>
-                        <MDBCardBody>
-                            <form>
-                                <div className="grey-text" style={{color:"green"}}>
-                                    <MDBInput
-                                        style={{width:300, marginTop: 25,}}
-                                        label="Title"
-                                        type="text"
-                                        onChange={(event)=>setTitle(event.target.value)}
-                                        required
-                                    />
+                        <MDBCard style={{backgroundColor:'white', marginTop:150}}>
+                            <MDBCardHeader className="form-header font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20, backgroundColor:'green'}}>
+                                <h3 className="my-3 text-left text-white">
+                                    Add Ticket
+                                </h3>
+                            </MDBCardHeader>
+                            <MDBCardBody>
+                                <form>
+                                    <div className="grey-text" style={{color:"green"}}>
+                                        <MDBInput
+                                            style={{width:300, marginTop: 25,}}
+                                            label="Title"
+                                            type="text"
+                                            onChange={(event)=>setTitle(event.target.value)}
+                                            required
+                                        />
 
-                                    <MDBInput
-                                        type="textarea"
-                                        rows="8"
-                                        label="Description"
-                                        onChange={(event)=>setDescription(event.target.value)}
-                                        required
-                                    />
+                                        <MDBInput
+                                            type="textarea"
+                                            rows="8"
+                                            label="Description"
+                                            onChange={(event)=>setDescription(event.target.value)}
+                                            required
+                                        />
 
-                                    <MDBInput
-                                        style={{width:300, marginTop: 25}}
-                                        label="Submitted By"
-                                        type="text"
-                                        onChange={(event)=>setSubmittedBy(event.target.value)}
-                                        required
-                                    />
+                                        <MDBInput
+                                            style={{width:300, marginTop: 25}}
+                                            label="Submitted By"
+                                            type="text"
+                                            onChange={(event)=>setSubmittedBy(event.target.value)}
+                                            required
+                                        />
 
-                                </div>
+                                    </div>
 
-                                <Button
-                                    variant="contained"
-                                    className={classes.color}
-                                    size="large"
-                                    type="submit"
-                                    onClick={() => {
-                                        submitData();
-                                    }}
-                                >
-                                    Submit
-                                </Button>
-                            </form>
-                        </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
+                                    <Link to="/dashboardta/ticketsTA">
+                                        <Button
+                                            variant="contained"
+                                            className={classes.color}
+                                            size="large"
+                                            type="submit"
+                                            onClick={() => {
+                                                submitData();
+                                            }}
+                                        >
+                                            Submit
+                                        </Button>
+                                    </Link>
+                                </form>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
         </div>
     );
 };

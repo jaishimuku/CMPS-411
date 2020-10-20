@@ -220,7 +220,7 @@ const WelcomeTA = (props) => {
                             <span className={classes.number}>Resolved: <strong> {resolved}</strong></span>
                           </div>
 
-                          <Link to="/ticketsAdmin">
+                          <Link to="/dashboardta/ticketsTA">
                             <div className={classes.iconSpan}>
                               <ClearIcon color="error"
                                          className={classes.icon}
