@@ -17,5 +17,10 @@ namespace SLU.CS.LAB.Models
         public Boolean IsResolved { get; set; }
         [Required]
         public string SubmittedBy { get; set; }
+        public DateTime SubmittedAt { get; set; }
+        public Ticket()
+        {
+            SubmittedAt = DateTime.Now;
+        }
     }
 }
