@@ -14,7 +14,7 @@ import GetTA from "./components/bodyAdmin/GetTA";
 import Logout from "./components/auth/Logout";
 import NotFoundView from "./components/error";
 import getTicketsAdmin from "./components/bodyAdmin/getTicketsAdmin/index";
-import getTicketsTA from "./components/bodyTA/getTicketsTA/CreateTicket";
+import getTicketsTA from "./components/bodyTA/getTicketsTA/getTATickents";
 import ActivityLogAdmin from "./components/bodyAdmin/ActivityLogAdmin/index";
 import ActivityLogTA from "./components/bodyTA/ActivityLogTA/index";
 import getScheduleGrid from "./components/bodyTA/Schedule/index.txt";
@@ -23,6 +23,7 @@ import { connect } from "react-redux";
 import scheduleAdmin from "./components/bodyAdmin/scheduleAdmin";
 import scheduleTA from "./components/bodyTA/scheduleTA";
 import { LogIn } from "react-feather";
+import CreateTicket from "./components/bodyTA/getTicketsTA/CreateTicket";
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
@@ -87,69 +88,70 @@ import { LogIn } from "react-feather";
 //(2)------------->
 
 const App = (props) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login} exact />
-          <Route path="/login" component={Login} exact />
-          {props.val.isAdmin === true && ( //route according to role
-            <Route
-              path="/dashboardadmin"
-              render={({ match: { url } }) => (
-                <>
-                  <Route path={`${url}/`} component={WelcomeAdmin} exact />
-                  <Route path={`${url}/welcome`} component={WelcomeAdmin} />
-                  <Route path={`${url}/getTA`} component={GetTA} />
-                  <Route path={`${url}/addTA`} component={CreateTA} />
-                  <Route path={`${url}/editTA`} component={editTA} />
-                  <Route
-                    path={`${url}/ticketsAdmin`}
-                    component={getTicketsAdmin}
-                  />
-                  <Route
-                    path={`${url}/activityLogAdmin`}
-                    component={ActivityLogAdmin}
-                  />
-                  <Route
-                    path={`${url}/scheduleAdmin`}
-                    component={scheduleAdmin}
-                  />
-                </>
-              )}
-            />
-          )}
-          {props.val.isAdmin === false && (
-            <Route
-              path="/dashboardta"
-              render={({ match: { url } }) => (
-                <>
-                  <Route path={`${url}/`} component={WelcomeTA} exact />
-                  <Route path={`${url}/welcome`} component={WelcomeTA} />
-                  {/* <Route path={`${url}/schedule`} component={getScheduleGrid} /> */}
-                  <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
-                  <Route
-                    path={`${url}/activityLogTA`}
-                    component={ActivityLogTA}
-                  />
-                  <Route path={`${url}/scheduleTA`} component={scheduleTA} />
-                </>
-              )}
-            />
-          )}
-          <Route path="/logout" component={Logout} />
-          <Route component={Login} />
-        </Switch>
-      </Router>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={Login} exact />
+                    <Route path="/login" component={Login} exact />
+                    {props.val.isAdmin === true && ( //route according to role
+                        <Route
+                            path="/dashboardadmin"
+                            render={({ match: { url } }) => (
+                                <>
+                                    <Route path={`${url}/`} component={WelcomeAdmin} exact />
+                                    <Route path={`${url}/welcome`} component={WelcomeAdmin} />
+                                    <Route path={`${url}/getTA`} component={GetTA} />
+                                    <Route path={`${url}/addTA`} component={CreateTA} />
+                                    <Route path={`${url}/editTA`} component={editTA} />
+                                    <Route
+                                        path={`${url}/ticketsAdmin`}
+                                        component={getTicketsAdmin}
+                                    />
+                                    <Route
+                                        path={`${url}/activityLogAdmin`}
+                                        component={ActivityLogAdmin}
+                                    />
+                                    <Route
+                                        path={`${url}/scheduleAdmin`}
+                                        component={scheduleAdmin}
+                                    />
+                                </>
+                            )}
+                        />
+                    )}
+                    {props.val.isAdmin === false && (
+                        <Route
+                            path="/dashboardta"
+                            render={({ match: { url } }) => (
+                                <>
+                                    <Route path={`${url}/`} component={WelcomeTA} exact />
+                                    <Route path={`${url}/welcome`} component={WelcomeTA} />
+                                    {/* <Route path={`${url}/schedule`} component={getScheduleGrid} /> */}
+                                    <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
+                                    <Route
+                                        path={`${url}/activityLogTA`}
+                                        component={ActivityLogTA}
+                                    />
+                                    <Route path={`${url}/scheduleTA`} component={scheduleTA} />
+                                    <Route path={`${url}/Createtickets`} component={CreateTicket} />
+                                </>
+                            )}
+                        />
+                    )}
+                    <Route path="/logout" component={Logout} />
+                    <Route component={Login} />
+                </Switch>
+            </Router>
+        </ThemeProvider>
+    );
 };
 
 const mapStateToProps = (state) => {
-  return {
-    val: state.reducer,
-  };
+    return {
+        val: state.reducer,
+    };
 };
 
 export default connect(mapStateToProps, null)(App);
