@@ -25,6 +25,7 @@ const CreateTicket = () => {
     const [description, setDescription] = useState("");
     const [isResolved, setIsResolved] = useState(false);
     const [submittedBy, setSubmittedBy] = useState("");
+    const [submittedAt, setAubmittedAt] = useState();
     const classes = useStyles();
 
     let toastProp = {
@@ -47,6 +48,7 @@ const CreateTicket = () => {
                     description: description,
                     isResolved: isResolved,
                     submittedBy: submittedBy,
+                    submittedAt: submittedAt,
                 })
         }
 
@@ -71,7 +73,7 @@ const CreateTicket = () => {
                 <MDBCol md="10">
 
                     <MDBCard style={{backgroundColor:'white', marginTop:150}}>
-                        <MDBCardHeader className="form-header btn-dark-green font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20}}>
+                        <MDBCardHeader className="form-header font-italic rounded " style={{marginLeft:20, marginTop:-25, marginRight:20, backgroundColor:'green'}}>
                             <h3 className="my-3 text-left text-white">
                                 Add Ticket
                             </h3>

@@ -28,8 +28,9 @@ namespace SLU.CS.LAB.Controllers
                     Title = ticket.Title,
                     Description = ticket.Description,
                     IsResolved = false,
-                    SubmittedBy = ticket.SubmittedBy
-                };
+                    SubmittedBy = ticket.SubmittedBy,
+                    SubmittedAt = ticket.SubmittedAt,
+                          };
                 _context.Add(newTicket);
                 _context.SaveChanges();
 
@@ -46,6 +47,28 @@ namespace SLU.CS.LAB.Controllers
             var tickets = _context.Tickets.ToList();
 
             return Ok(tickets);
+        }
+
+        [HttpGet("/resolved")]
+        public ActionResult GetResolved()
+        {
+
+            var tickets = _context.Tickets.Where(x => x.IsResolved == true).ToList();
+
+            var count = tickets.Count();
+
+            return Ok(count);
+        }
+
+        [HttpGet("/unResolved")]
+        public ActionResult GetUnResolvedd()
+        {
+
+            var tickets = _context.Tickets.Where(x => x.IsResolved == false).ToList();
+
+            var count = tickets.Count();
+
+            return Ok(count);
         }
 
         [HttpPut("{id}")]

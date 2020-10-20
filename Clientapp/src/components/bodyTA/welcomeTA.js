@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     fontWeight: "medium",
     fontSize: 15,
-    color: "grey"
+    color: "black"
   },
   text: {
     fontSize: 15,
@@ -105,6 +105,8 @@ const WelcomeTA = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const[tas, setTa] = useState([]);
+  const[resolved, setResolved] = useState();
+  const  [unresolved, setUnResolved]= useState();
 
   const hideMsg = () => {
     dispatch(loginMsg(false));
@@ -127,8 +129,24 @@ const WelcomeTA = (props) => {
         .catch((error) => console.log(error));
   };
 
+  const fetchResolved = () => {
+    fetch(`${baseURL}/resolved`)
+        .then((response) => response.json())
+        .then((res) => setResolved(res))
+        .catch((error) => console.log(error));
+  };
+
+  const fetchUnResolved = () => {
+    fetch(`${baseURL}/unResolved`)
+        .then((response) => response.json())
+        .then((res) => setUnResolved(res))
+        .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     fetchTA();
+    fetchResolved();
+    fetchUnResolved();
   });
 
   return (
@@ -199,7 +217,7 @@ const WelcomeTA = (props) => {
                             <DoneAllIcon color="primary"
                                          className={classes.icon}
                             />
-                            <span className={classes.number}>Resolved: <strong>10</strong></span>
+                            <span className={classes.number}>Resolved: <strong> {resolved}</strong></span>
                           </div>
 
                           <Link to="/ticketsAdmin">
@@ -208,7 +226,7 @@ const WelcomeTA = (props) => {
                                          className={classes.icon}
                               />
                               <br/>
-                              <span className={classes.text} style={{color:'red'}}>Unresolved: <strong>5</strong></span>
+                              <span className={classes.text} style={{color:'red'}}>Unresolved: <strong>{unresolved}</strong></span>
                             </div>
                           </Link>
                         </MDBCardBody>

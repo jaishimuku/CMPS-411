@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Box, Container, Grid, makeStyles } from "@material-ui/core";
 import ProductCard from "./ProductCard";
-import data from "./data";
 import LayoutAdmin from "../../../Layout/SidebarAdmin/indexAdmin";
+import baseURL from "../../../baseURL";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +37,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getTicketsAdmin = () => {
+  const [tiers, setTiers] = useState([]);
+  const [hasError, setErrors] = useState(false);
   const classes = useStyles();
-  const [products] = useState(data);
+  const data = JSON.parse(JSON.stringify(tiers));
+
+  function fetchData() {
+    fetch(`${baseURL}/api/Ticket`)
+        .then((response) => { return response.json()})
+        .then((res) => setTiers(res))
+        .catch((err) => setErrors(err));
+  }
+  useEffect(() => {
+    fetchData();
+  });
 
   return (
     <div>
@@ -46,14 +59,14 @@ const getTicketsAdmin = () => {
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Container className={classes.root}>
-              <div className={classes.root} title="Products">
+              <div className={classes.root} >
                 <Box mt={3}>
                   <Grid container spacing={3}>
-                    {products.map((product) => (
-                      <Grid item key={product.id} lg={4} md={6} xs={12}>
+                    {data.map((ticket) => (
+                      <Grid item key={ticket.id} lg={4} md={6} xs={12}>
                         <ProductCard
                           className={classes.productCard}
-                          product={product}
+                          ticket={ticket}
                         />
                       </Grid>
                     ))}
