@@ -24,6 +24,8 @@ import scheduleAdmin from "./components/bodyAdmin/scheduleAdmin";
 import scheduleTA from "./components/bodyTA/scheduleTA";
 import { LogIn } from "react-feather";
 import CreateTicket from "./components/bodyTA/getTicketsTA/CreateTicket";
+import messageAdmin from './components/bodyAdmin/messageAdmin';
+import messageTA from './components/bodyTA/messageTA';
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY
@@ -105,6 +107,7 @@ const App = (props) => {
                                     <Route path={`${url}/getTA`} component={GetTA} />
                                     <Route path={`${url}/addTA`} component={CreateTA} />
                                     <Route path={`${url}/editTA`} component={editTA} />
+                                    <Route path={`${url}/message`} component={messageAdmin}/>
                                     <Route
                                         path={`${url}/ticketsAdmin`}
                                         component={getTicketsAdmin}
@@ -130,6 +133,7 @@ const App = (props) => {
                                     <Route path={`${url}/welcome`} component={WelcomeTA} />
                                     {/* <Route path={`${url}/schedule`} component={getScheduleGrid} /> */}
                                     <Route path={`${url}/ticketsTA`} component={getTicketsTA} />
+                                    <Route path={`${url}/message`} component={messageTA}/>
                                     <Route
                                         path={`${url}/activityLogTA`}
                                         component={ActivityLogTA}

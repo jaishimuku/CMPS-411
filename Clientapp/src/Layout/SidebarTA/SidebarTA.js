@@ -41,7 +41,7 @@ const items = [
     title: "Tickets",
   },
   {
-    href: "/dashboardta/welcome",
+    href: "/dashboardta/message",
     icon: MessageIcon,
     title: "Message",
   },
