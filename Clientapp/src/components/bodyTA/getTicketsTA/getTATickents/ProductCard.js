@@ -77,7 +77,7 @@ const ProductCard = ({ className, ticket, ...rest }) => {
                                 SubmittedBy:
                                 <strong> { ticket.submittedBy}
                                     <br/>
-                                    {moment(ticket.submittedAt).format("MM/DD/YYYY")}</strong>
+                                    {moment(ticket.submittedAt).format("lll")}</strong>
                             </Typography>
                         </Grid>
                         <Grid className={classes.statsItem} item>

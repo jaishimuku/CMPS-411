@@ -13,6 +13,7 @@ using SLU.CS.LAB.Models;
 
 namespace SLU.CS.LAB.Controllers
 {
+  
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -34,6 +35,8 @@ namespace SLU.CS.LAB.Controllers
             var result = await _context.Users.Where(x => x.IsAdmin == false).ToListAsync();
             return Ok(result);
         }
+
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
