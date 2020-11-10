@@ -32,7 +32,7 @@ const message = (props) => {
 
   function fetchMessages() {
     fetch(
-      `${baseURL}api​/users​/${props.message[0].senderId}​/Messages​/thread​/${props.message[0].receiverId}`
+      `${baseURL}/api/users/${props.message[0].senderId}/Messages/thread/${props.message[0].receiverId}`
     )
       .then((response) => {
         debugger;

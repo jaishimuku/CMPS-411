@@ -15,7 +15,7 @@ using SLU.CS.LAB.Models;
 
 namespace SLU.CS.LAB.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/user/{userId}/[controller]")]
     [ApiController]
     public class MessagesTestController : ControllerBase
@@ -32,8 +32,8 @@ namespace SLU.CS.LAB.Controllers
         [HttpGet("{id}")] //for single message
         public async Task<IActionResult> GetSingleMessage(int userId, int id)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var message = await _repo.Messages.FirstOrDefaultAsync(m => m.Id == id);
             if (message == null)
@@ -45,8 +45,8 @@ namespace SLU.CS.LAB.Controllers
         [HttpGet("latest")]
         public async Task<IActionResult> GetLatestMessage(int userId, int id)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var message = await _repo.Messages.FirstOrDefaultAsync(m => m.Id == id);
             if (message == null)
@@ -62,8 +62,8 @@ namespace SLU.CS.LAB.Controllers
         {
             var sender = await _repo.Users.FirstOrDefaultAsync(m => m.Id == userId);
 
-            if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            //if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //    return Unauthorized();
 
             messageForCreationDto.SenderId = userId;
 
@@ -81,20 +81,21 @@ namespace SLU.CS.LAB.Controllers
 
             return Ok(messageToReturn);
         }
-        //[HttpGet("all")]
-        //public ActionResult<List<Message>> GetMessagesForUser(int userId)
-        //{
-        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-        //        return Unauthorized();
 
-          
-        //}
+
+        [HttpGet("allMessages")]
+        public async Task<IActionResult> GetAll(int userId)
+        {
+            var messages = await _repo.Messages.LastOrDefaultAsync(x => x.Id == userId);
+            return Ok(messages);
+        }
+
 
         [HttpGet("all/{recipientId}")]
         public async Task<IActionResult> GetAllMessagesWithAUser(int userId, int recipientId)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var messages = await _repo.Messages
                 .Include(u => u.Sender)
@@ -114,8 +115,8 @@ namespace SLU.CS.LAB.Controllers
         [HttpPost("{id}/read")]
         public async Task<IActionResult> MarkMessageRead(int id, int userId)  // we can do this inside GetMessageThread
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var message = await _repo.Messages.FirstOrDefaultAsync(x => x.Id == id);
 

@@ -16,7 +16,7 @@ using SLU.CS.LAB.Models;
 
 namespace SLU.CS.LAB.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -33,8 +33,8 @@ namespace SLU.CS.LAB.Controllers
             [HttpGet("{id}", Name = "GetMessage")] //get single message
             public async Task<IActionResult> GetMessage(int userId, int id)
             {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var messageFromRepo = await _repo.GetMessage(id);
 
@@ -47,8 +47,8 @@ namespace SLU.CS.LAB.Controllers
             public async Task<IActionResult> GetMessagesForUser(int userId,
                 [FromQuery] MessageParams messageParams)
             {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             messageParams.UserId = userId;
 
@@ -56,14 +56,17 @@ namespace SLU.CS.LAB.Controllers
 
                 var messages = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
-            return Ok(messages);
+            var result = messages;
+
+
+            return Ok(result);
             }
 
             [HttpGet("thread/{recipientId}")]
             public async Task<IActionResult> GetMessageThread(int userId, int recipientId)
             {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var messagesFromRepo = await _repo.GetMessagesThread(userId, recipientId);
 
@@ -79,8 +82,8 @@ namespace SLU.CS.LAB.Controllers
 
                 var sender = await _repo.GetUser(userId);
 
-            if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            //if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //    return Unauthorized();
 
             messageForCreationDto.SenderId = userId;
 
@@ -106,8 +109,8 @@ namespace SLU.CS.LAB.Controllers
             [HttpPost("{id}")] // dont want to delete messages of both side so HttpPost
             public async Task<IActionResult> DeleteMessage(int id, int userId)
             {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var messageFromRepo = await _repo.GetMessage(id);
 
@@ -130,8 +133,8 @@ namespace SLU.CS.LAB.Controllers
             [HttpPost("{id}/read")]
             public async Task<IActionResult> MarkMessageRead(int id, int userId)  // we can do this inside GetMessageThread
             {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
-                return Unauthorized();
+            //if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) // checks is user current  checks token, needs to match token
+            //    return Unauthorized();
 
             var message = await _repo.GetMessage(id);
 
