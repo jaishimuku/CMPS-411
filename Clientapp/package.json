@@ -8,6 +8,8 @@
     "ag-grid-react": "^24.0.0",
     "bootstrap": "^4.5.2",
     "dropdown": "^0.2.0",
+    "javascript-time-ago": "^2.3.2",
+    "jwt-decode": "^3.1.1",
     "lodash.throttle": "^4.1.1",
     "material-ui": "^1.0.0-beta.47",
     "mdbreact": "^4.27.0",
@@ -29,7 +31,9 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^2.0.0"
+    "semantic-ui-react": "^2.0.0",
+    "timeago-react": "^3.0.1",
+    "timeago.js": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

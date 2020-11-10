@@ -187,7 +187,7 @@ const Results = () => {
                     <Box alignItems="center" display="flex">
                       <Avatar
                         className={classes.avatar}
-                        src={student.avatarUrl}
+                        //src={student.avatarUrl}
                       >
                         {student.tutor !== null ? (
                           getInitials(student.tutor)

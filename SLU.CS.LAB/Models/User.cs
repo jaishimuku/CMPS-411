@@ -17,5 +17,8 @@ namespace SLU.CS.LAB.Models
         public byte[] PasswordSalt { get; set; }
         public bool IsAdmin { get; set; }
 
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
+
     }
 }

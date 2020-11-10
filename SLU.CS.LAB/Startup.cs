@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SLU.CS.LAB.Data;
+using SLU.CS.LAB.Data.SeedUser;
+using SLU.CS.LAB.Helpers;
 
 namespace SLU.CS.LAB
 {
@@ -31,9 +34,12 @@ namespace SLU.CS.LAB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DataContext")));
+            services.AddAutoMapper(typeof(SLUCSLABRepository).Assembly);
             
             services.AddControllers();
             services.AddScoped<IAuthRepository, AuthRepository>(); // service is created once per request; one instance per HTTP request and used in another request
+            services.AddScoped<ISLUCSLABRepository, SLUCSLABRepository>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options => {
                         options.TokenValidationParameters = new TokenValidationParameters
@@ -45,7 +51,6 @@ namespace SLU.CS.LAB
                             ValidateAudience = false
                         };
                     });
-
             services.AddSwaggerGen();
         }
 
@@ -70,6 +75,7 @@ namespace SLU.CS.LAB
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // we can make only for one http "With("Client")"
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
