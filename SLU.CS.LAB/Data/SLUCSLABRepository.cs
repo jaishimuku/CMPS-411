@@ -61,8 +61,7 @@ namespace SLU.CS.LAB.Data
             }
 
             messages = messages.OrderByDescending(d => d.MessageSent);
-            return await PagedList<Message>.CreatedAsync(messages,
-                messageParams.PageNumber, messageParams.PageSize);
+            return await PagedList<Message>.CreatedAsync(messages,messageParams.PageNumber, messageParams.PageSize);
         }
 
         public async Task<IEnumerable<Message>> GetMessagesThread(int userId, int recipientId)
