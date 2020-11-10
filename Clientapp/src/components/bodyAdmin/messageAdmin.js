@@ -75,14 +75,11 @@ const messageAdmin = (className, staticContext, ...rest) => {
             <LayoutAdmin />
             <Container style={{marginTop:100, marginLeft:400, width:1000}}>
                 <div className="btn-group">
-                    <button className="btn btn-warning" >
-                        <i className="fa fa-envelope"/> Unread
+                    <button className="btn btn-warning" style={{margin:5}}>
+                        <i className="fa fa-envelope"/> InBox
                     </button>
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-envelope-open"/> Inbox
-                    </button>
-                    <button className="btn btn-primary">
-                        <i className="fa fa-paper-plane"/> Outbox
+                    <button className="btn btn-primary" style={{margin:5}}>
+                        <i className="fa fa-paper-plane"/> Compose
                     </button>
                 </div>
                 <div className="row">
@@ -136,64 +133,64 @@ const messageAdmin = (className, staticContext, ...rest) => {
                 </Box>
 
             </Container>
-            <Container style={{marginLeft:400, width:1000}}>
-                <div className="card">
-                    <div className="card-body">
-                        {/*<div>*/}
-                        {/*    <p>No messages yet... Say hi by using the message box below</p>*/}
-                        {/*</div>*/}
-                        <ul className="chat">
-                            <li>
-                                {/*to them*/}
-                                <div>
-                                    <div className="chat-body float-left">
-                                        <div className="header">
-                                            <strong className="primary-font float-left">Sender</strong>
-                                            <br/>
-                                            <small className="text-muted float-right">
-                                                <span className="fa fa-clock-o">  Sender messageSent Time</span>
-                                            </small>
-                                        </div>
-                                        <p>message content</p>
-                                    </div>
-                                </div>
-                                {/*to me */}
-                                <div>
-                                    <div className="chat-body float-right">
-                                        <div className="header">
-                                            <strong className="primary-font float-right">Me</strong>
-                                            <br/>
-                                            <small className="text-muted">
-                                                <span className="fa fa-clock-o">messageSent Time</span>
-                                                <span className="text-danger"> (Unread)</span>
-                                                <span  className="text-success">  (Read  message dateRead )</span>
-                                            </small>
-                                        </div>
-                                        <p>message content</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="card-footer">
-                        <form>
-                            <div className="input-group">
-                                <input type="text"
-                                       name="content"
-                                       required
-                                       className="form-control input-sm"
-                                       placeholder="send a private messaage"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary">Send</button>
-                                </div>
-                                <div>
+            {/*<Container style={{marginLeft:400, width:1000}}>*/}
+            {/*    <div className="card">*/}
+            {/*        <div className="card-body">*/}
+            {/*            /!*<div>*!/*/}
+            {/*            /!*    <p>No messages yet... Say hi by using the message box below</p>*!/*/}
+            {/*            /!*</div>*!/*/}
+            {/*            <ul className="chat">*/}
+            {/*                <li>*/}
+            {/*                    /!*to them*!/*/}
+            {/*                    <div>*/}
+            {/*                        <div className="chat-body float-left">*/}
+            {/*                            <div className="header">*/}
+            {/*                                <strong className="primary-font float-left">Sender</strong>*/}
+            {/*                                <br/>*/}
+            {/*                                <small className="text-muted float-right">*/}
+            {/*                                    <span className="fa fa-clock-o">  Sender messageSent Time</span>*/}
+            {/*                                </small>*/}
+            {/*                            </div>*/}
+            {/*                            <p>message content</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                    /!*to me *!/*/}
+            {/*                    <div>*/}
+            {/*                        <div className="chat-body float-right">*/}
+            {/*                            <div className="header">*/}
+            {/*                                <strong className="primary-font float-right">Me</strong>*/}
+            {/*                                <br/>*/}
+            {/*                                <small className="text-muted">*/}
+            {/*                                    <span className="fa fa-clock-o">messageSent Time</span>*/}
+            {/*                                    <span className="text-danger"> (Unread)</span>*/}
+            {/*                                    <span  className="text-success">  (Read  message dateRead )</span>*/}
+            {/*                                </small>*/}
+            {/*                            </div>*/}
+            {/*                            <p>message content</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                </li>*/}
+            {/*            </ul>*/}
+            {/*        </div>*/}
+            {/*        <div className="card-footer">*/}
+            {/*            <form>*/}
+            {/*                <div className="input-group">*/}
+            {/*                    <input type="text"*/}
+            {/*                           name="content"*/}
+            {/*                           required*/}
+            {/*                           className="form-control input-sm"*/}
+            {/*                           placeholder="send a private messaage"/>*/}
+            {/*                    <div className="input-group-append">*/}
+            {/*                        <button className="btn btn-primary">Send</button>*/}
+            {/*                    </div>*/}
+            {/*                    <div>*/}
 
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </Container>
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </form>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</Container>*/}
         </div>
     )
 }

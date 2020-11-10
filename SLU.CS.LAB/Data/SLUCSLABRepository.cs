@@ -41,7 +41,10 @@ namespace SLU.CS.LAB.Data
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
-            var messages = _context.Messages.AsQueryable();
+            var messages = _context.Messages
+                .Include(u => u.Sender)
+                .Include(u => u.Recipient)
+                .AsQueryable();
 
             switch (messageParams.MessageContainer)
             {
