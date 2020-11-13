@@ -40,7 +40,6 @@ const Compose = (props) => {
   const [recipient, setRecipient] = useState("");
 
   useEffect(() => {
-    //call all users and add pao
     fetch(`${baseURL}/api/admin`)
       .then((response) => {
         return response.json();

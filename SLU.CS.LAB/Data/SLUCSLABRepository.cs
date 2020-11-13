@@ -70,11 +70,9 @@ namespace SLU.CS.LAB.Data
         public async Task<IEnumerable<Message>> GetMessagesThread(int userId, int recipientId)
         {
             var messages = await _context.Messages
-               .Where(m => m.RecipientId == userId && m.RecipientDeleted == false
-                       && m.SenderId == recipientId
-                   || m.RecipientId == recipientId && m.SenderId == userId
-                       && m.SenderDeleted == false) // returns conversation between two users
-               .OrderByDescending(m => m.MessageSent)
+               .Where(m => 
+               (m.RecipientId == userId && m.RecipientDeleted == false && m.SenderId == recipientId)
+               || (m.RecipientId == recipientId && m.SenderId == userId&& m.SenderDeleted == false))
                .ToListAsync();
 
             return messages;
