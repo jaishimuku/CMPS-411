@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Table,
@@ -10,47 +10,60 @@ import {
   TableRow,
   Button,
 } from "@material-ui/core";
+import { connect } from "react-redux";
+
 import moment from "moment";
 import Message from "./message";
+import jwt_decode from "jwt-decode";
+import baseURL from "../../../baseURL";
 
 const ListOfMessages = (props) => {
-  const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState(null);
+  const [messageRow, setMessageRow] = useState(null);
 
-  var messageRow = [
-    //if this is louis
-    [
-      {
-        id: 1,
-        senderId: 1,
-        senderName: "Pao",
-        receiverId: 2,
-        receiverName: "Louis",
-        message: "Hello this is Pao",
-        time: "15 min ago",
+  useEffect(() => {
+    fetchListOfMessages();
+  }, []);
+
+  const fetchListOfMessages = () => {
+    console.log(
+      "value of props.val.first",
+      props.val.firstName + props.val.lastName
+    );
+    var tokenFromStorage = JSON.parse(localStorage.getItem("state")).reducer
+      .token;
+    var decodedUser = jwt_decode(tokenFromStorage);
+    var id = decodedUser.nameid;
+
+    fetch(`${baseURL}/api/user/MessagesTest/lastMessage/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setMessageRow(data);
+      })
+      .catch((err) => console.log("The error is ", err));
+  };
+
+  const deleteMessages = (senderId, receiverId) => {
+    fetch(`${baseURL}/api/user/MessagesTest`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        id: 2,
-        senderId: 2,
-        senderName: "Louis",
-        receiverId: 1,
-        receiverName: "Pao",
-        message: "Hello this is Louis",
-        time: "5 min ago",
-      },
-    ],
-    [
-      {
-        id: 1,
-        senderId: 1,
-        senderName: "Pao",
-        receiverId: 3,
-        receiverName: "Subash",
-        message: "Hello there Subash",
-        time: "1 min ago",
-      },
-    ],
-  ];
+      body: JSON.stringify({ userId: senderId, otherUserId: receiverId }),
+    })
+      .then((response) => {
+        debugger;
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log("The error is ", err));
+  };
+
   return (
     <Container style={{ width: 1000, paddingLeft: 0 }}>
       <Box>
@@ -74,36 +87,48 @@ const ListOfMessages = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {messageRow.map((message) => {
-                return (
-                  <TableRow
-                    hover
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setMessage(message);
-                      setShowMessage(true);
-                    }}
-                  >
-                    <TableCell>
-                      {/*{msg.SenderFirstName}*/}
-                      {message[0].senderName}
-                    </TableCell>
-                    <TableCell>
-                      {message[message.length - 1].message}{" "}
-                    </TableCell>
-                    <TableCell>
-                      {/*{moment(msg.messageSent).fromNow()} */}
-                      {message[message.length - 1].time}
-                    </TableCell>
-                    <TableCell>
-                      <Button className="btn btn-danger" size="small">
-                        Delete
-                      </Button>
-                    </TableCell>
-                    <TableCell />
-                  </TableRow>
-                );
-              })}
+              {messageRow != null
+                ? messageRow.map((message) => {
+                    return (
+                      <TableRow
+                        hover
+                        style={{ cursor: "pointer" }}
+                        onClick={(event) => {
+                          setMessage(message);
+                        }}
+                      >
+                        <TableCell>
+                          {/*{msg.SenderFirstName}*/}
+                          {props.val.firstName === message.senderName
+                            ? message.receiverName
+                            : // : message.senderName}     //uncomment this after name issue is solved and comment line below
+                              "PLACEHOLDER"}
+                        </TableCell>
+                        <TableCell>{message.content} </TableCell>
+                        <TableCell>
+                          {/*{moment(msg.messageSent).fromNow()} */}
+                          {moment(message.messageSent).fromNow()}
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            className="btn btn-danger"
+                            size="small"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              deleteMessages(
+                                message.senderId,
+                                message.recipientId
+                              );
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </TableCell>
+                        <TableCell />
+                      </TableRow>
+                    );
+                  })
+                : ""}
             </TableBody>
           </Table>
         )}
@@ -112,4 +137,9 @@ const ListOfMessages = (props) => {
   );
 };
 
-export default ListOfMessages;
+const mapStateToProps = (state) => {
+  return {
+    val: state.reducer,
+  };
+};
+export default connect(mapStateToProps, null)(ListOfMessages);
