@@ -38,7 +38,10 @@ namespace SLU.CS.LAB.Controllers
             var lastMessageWithUsers = new ArrayList();
             foreach (var user in otherUsers)
             {
-                var lastMessage = await _repo.Messages.Where(x => (x.SenderId == id && x.RecipientId == user.Id) || (x.SenderId == user.Id && x.RecipientId == id)).OrderByDescending(x => x.MessageSent).FirstOrDefaultAsync();
+                var lastMessage = await _repo.Messages
+                    .Include(u => u.Sender)
+                    .Include(u => u.Recipient)
+                    .Where(x => (x.SenderId == id && x.RecipientId == user.Id) || (x.SenderId == user.Id && x.RecipientId == id)).OrderByDescending(x => x.MessageSent).FirstOrDefaultAsync();
                 if (lastMessage != null)
                 {
                     lastMessageWithUsers.Add(lastMessage);

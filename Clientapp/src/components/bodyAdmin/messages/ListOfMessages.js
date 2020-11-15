@@ -47,15 +47,20 @@ const ListOfMessages = (props) => {
   };
 
   const deleteMessages = (senderId, receiverId) => {
+      var objToSend = {
+          userId: senderId,
+          otherUserId: receiverId,
+      };
+console.log("values",  senderId, receiverId)
     fetch(`${baseURL}/api/user/MessagesTest`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: senderId, otherUserId: receiverId }),
+        body: JSON.stringify(objToSend),
     })
       .then((response) => {
-        debugger;
+        //debugger;
         return response.json();
       })
       .then((data) => {
@@ -99,10 +104,10 @@ const ListOfMessages = (props) => {
                       >
                         <TableCell>
                           {/*{msg.SenderFirstName}*/}
-                          {props.val.firstName === message.senderName
-                            ? message.receiverName
-                            : // : message.senderName}     //uncomment this after name issue is solved and comment line below
-                              "PLACEHOLDER"}
+                          {props.val.firstName === message.senderFirstName
+                            ? message.recipientFirstName
+                            :   message.senderFirstName
+                            }
                         </TableCell>
                         <TableCell>{message.content} </TableCell>
                         <TableCell>
