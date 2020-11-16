@@ -24,7 +24,7 @@ import scheduleTA from "./components/bodyTA/scheduleTA";
 import { LogIn } from "react-feather";
 import CreateTicket from "./components/bodyTA/getTicketsTA/CreateTicket";
 import messageAdmin from "./components/bodyAdmin/messages/messageAdmin";
-import messageTA from "./components/bodyTA/messageTA";
+import messageTA from "./components/bodyTA/messages/messageTA";
 
 //FOR EASIER DEVELOPING EXPERIENCE,USE(1) AND COMMENT (2).(2) HAS ROLE ACCESS AND WILL GIVE 404 ERROR WHENEVER REFRESHED
 //ALSO PLEASE MAKE CHANGES IN BOTH (1) and (2) ACCORDINGLY

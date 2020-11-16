@@ -55,7 +55,6 @@ const message = (props) => {
 
     var currentUserId = id;
 
-
     if (id == props.message.senderId) {
       var objToSend = {
         recipientId: props.message.recipientId,
@@ -68,7 +67,7 @@ const message = (props) => {
       };
     }
 
-    if (message == "") {
+    if (message === "") {
       alert("Something went wrong");
     } else {
       fetch(`${baseURL}/api/users/${currentUserId}/Messages`, {
@@ -189,7 +188,7 @@ const message = (props) => {
                   <Button
                     className="btn btn-primary"
                     style={{ margin: 20, height: 40 }}
-                    onClick={() => handleSend()}
+                    onClick={handleSend}
                   >
                     Send
                   </Button>
