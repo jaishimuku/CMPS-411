@@ -23,7 +23,7 @@ const ListOfMessages = (props) => {
 
   useEffect(() => {
     fetchListOfMessages();
-  }, []);
+  });
 
   const fetchListOfMessages = () => {
     console.log(
@@ -47,27 +47,17 @@ const ListOfMessages = (props) => {
   };
 
   const deleteMessages = (senderId, receiverId) => {
-      var objToSend = {
-          userId: senderId,
-          otherUserId: receiverId,
-      };
-console.log("values",  senderId, receiverId)
-    fetch(`${baseURL}/api/user/MessagesTest`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-        body: JSON.stringify(objToSend),
+    fetch(`${baseURL}/api/user/MessagesTest/${senderId}/${receiverId}`, {
+    method: "DELETE",
+  })
+.then((response) => {
+  return response.json();
+})
+    .then((data) => {
+      console.log(data);
     })
-      .then((response) => {
-        //debugger;
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log("The error is ", err));
-  };
+    .catch((err) => console.log("The error is ", err));
+};
 
   return (
     <Container style={{ width: 1000, paddingLeft: 0 }}>
