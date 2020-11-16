@@ -52,7 +52,7 @@ namespace SLU.CS.LAB.Controllers
             return Ok(allMessages);
         }
 
-        [HttpDelete] 
+        [HttpDelete("{userId}/{otherUserId}")]
         public async Task<IActionResult> DeleteMessage(int userId, int otherUserId)
         {
 

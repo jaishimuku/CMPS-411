@@ -47,6 +47,7 @@ const message = (props) => {
   }
 
   const handleSend = () => {
+
     var tokenFromStorage = JSON.parse(localStorage.getItem("state")).reducer
         .token;
     var decodedUser = jwt_decode(tokenFromStorage);
@@ -55,7 +56,7 @@ const message = (props) => {
 
     var currentUserId = id;
 
-    if (id === props.message.senderId) {
+    if (id == props.message.senderId) {
 
       var objToSend = {
         recipientId: props.message.recipientId,
@@ -98,7 +99,7 @@ const message = (props) => {
 
   return (
       <div>
-        <Container style={{ width: 1000, paddingLeft: "0px" }}>
+        <Container style={{ width: 800, paddingLeft: "0px", float: 'left' }}>
           <div className="card">
             <ArrowBackIcon
                 style={{ margin: 15 }}
@@ -110,125 +111,62 @@ const message = (props) => {
                     return (
                         <>
                           {
-                            (item.senderId === id) ? (
+                            (item.senderId == id) ? (
                                 <div className="chat-body">
                                   <div className="header">
-                                    <strong className="primary-font">
+
+                                    <strong className="primary-font float-right">
+                                    <br/>
                                       <Avatar className={classes.avatar}>
                                         {item.senderFirstName !== null
                                             ? getInitials(item.senderFirstName)
                                             : ""}
                                       </Avatar>
-                                      {item.senderFirstName}{" "}
                                     </strong>
+                                  <br/>
+                                  <span className="float-right">
                                     <p>{item.content}</p>
-                                    <small className="text-muted float-right">
-                          <span className="fa fa-clock">
-                            {moment(item.messageSent).fromNow()}
-                          </span>
-                                    </small>
-                                  </div>
+                                    <small className="text-muted ">
+                                        <span className="fa fa-clock">
+                                          {moment(item.messageSent).fromNow()}
+                                        </span>
+                                      </small>
+                                  </span>
 
-                                  <br />
-                                  <Divider />
+                                  </div>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <Divider/>
                                 </div>
-                            ) : <> </>
+                            ) : <>
+                              <div className="chat-body">
+                                <div className="header">
+                                  <br/>
+                                  <strong className="primary-font float-left ">
+                                    <Avatar className={classes.avatar}>
+                                      {item.senderFirstName !== null
+                                          ? getInitials(item.senderFirstName)
+                                          : ""}
+                                    </Avatar>
+                                  </strong>
+
+                                  <div className="RecievedMsg" style={{margin: 60, marginTop:-10, marginBottom: 5}}>
+                                    <p>{item.content}</p>
+                                    <small className="text-muted ">
+                                        <span className="fa fa-clock">
+                                          {moment(item.messageSent).fromNow()}
+                                        </span>
+                                      </small>
+                                  </div>
+                                </div>
+                                <Divider/>
+                              </div>
+                            </>
                           }
 
-                          {
-                            (item.senderId !== id) ? (
-                                <div className="chat-body">
-                                  <div className="header">
-                                    <strong className="primary-font">
-                                      <Avatar className={classes.avatar}>
-                                        {item.senderFirstName !== null
-                                            ? getInitials(item.senderFirstName)
-                                            : ""}
-                                      </Avatar>
-                                      {item.senderFirstName}{" "}
-                                    </strong>
-                                    <p>{item.content}</p>
-                                    <small className="text-muted float-left">
-                                      <span className="fa fa-clock">
-                                         {moment(item.messageSent).fromNow()}
-                                       </span>
-                                    </small>
-                                  </div>
-                                  <br />
-                                  <Divider />
-                                </div>
-                            ) : <> </>
-                          }
                         </>
 
-
-                        // (item.recipientId === id) ? (<p>true</p>) : (item.senderId === 1) ? (<p>false</p>) : (<p>No Messages</p>)
-                        // (console.log("loggedin", id))
-                        // (id === item.senderId) ? (<p>{item.senderFirstName}</p> ) : (id !==item.senderId) ?(<p> {item.senderFirstName}</p> ): <p></p>
-
-                        // <div>
-                        //
-                        //   {(item.senderId === id) ? (
-                        //       <div className="chat-body float-right">
-                        //         <strong className="primary-font">
-                        //           <Avatar className={classes.avatar}>
-                        //             {item.senderFirstName !== null
-                        //                 ? getInitials(item.senderFirstName)
-                        //                 : ""}
-                        //           </Avatar>
-                        //           {item.senderFirstName}{" "}
-                        //         </strong>
-                        //         <div className="header">
-                        //           <strong className="primary-font float-left">
-                        //             {item.content}{" "}
-                        //           </strong>
-                        //           <div>
-                        //             <small className="text-muted">
-                        //         <span className="fa fa-clock">
-                        //           {moment(item.messageSent).fromNow()}
-                        //         </span>
-                        //             </small>
-                        //           </div>
-                        //         </div>
-                        //         <br/>
-                        //         <Divider/>
-                        //       </div>
-                        //   ) : <> </>
-                        //   }
-                        //
-                        //   <div>
-                        //   {
-                        //     (item.senderId !== id) ? (
-                        //         <div className="chat-body">
-                        //           <strong className="primary-font">
-                        //             <Avatar className={classes.avatar}>
-                        //               {item.senderFirstName !== null
-                        //                   ? getInitials(item.senderFirstName)
-                        //                   : ""}
-                        //             </Avatar>
-                        //             {item.senderFirstName}{" "}
-                        //           </strong>
-                        //
-                        //           <div className="header float-right">
-                        //             <strong className="primary-font">
-                        //               <p>{item.content}</p>
-                        //             </strong>
-                        //             <div>
-                        //               <small className="text-muted">
-                        //         <span className="fa fa-clock">
-                        //           {moment(item.messageSent).fromNow()}
-                        //         </span>
-                        //               </small>
-                        //             </div>
-                        //           </div>
-                        //           <br/>
-                        //           <Divider/>
-                        //         </div>
-                        //
-                        //     ): <> </>
-                        //   }
-                        //   </div>
-                        // </div>
                     );
                   })
                   : ""}
