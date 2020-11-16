@@ -47,12 +47,27 @@ const message = (props) => {
   }
 
   const handleSend = () => {
-    var currentUserId = props.message.senderId;
+    var tokenFromStorage = JSON.parse(localStorage.getItem("state")).reducer
+        .token;
+    var decodedUser = jwt_decode(tokenFromStorage);
 
-    var objToSend = {
-      recipientId: props.message.recipientId,
-      content: message,
-    };
+    var id = decodedUser.nameid;
+
+    var currentUserId = id;
+
+    if (id === props.message.senderId) {
+
+      var objToSend = {
+        recipientId: props.message.recipientId,
+        content: message,
+      };
+
+    } else {
+      var objToSend = {
+        recipientId: props.message.senderId,
+        content: message,
+      };
+    }
 
     if (message === "") alert("Something went wrong");
 
@@ -73,13 +88,13 @@ const message = (props) => {
         .catch((err) => console.log("The error is ", err));
   };
 
-  // var tokenFromStorage = JSON.parse(localStorage.getItem("state")).reducer
-  //     .token;
-  // var decodedUser = jwt_decode(tokenFromStorage);
-  // var id = decodedUser.nameid;
-  var id = props.message.recipientId;
+  var tokenFromStorage = JSON.parse(localStorage.getItem("state")).reducer
+      .token;
+  var decodedUser = jwt_decode(tokenFromStorage);
 
-  console.log(id)
+  var id = decodedUser.nameid;
+
+
 
   return (
       <div>
@@ -98,7 +113,7 @@ const message = (props) => {
                             (item.senderId === id) ? (
                                 <div className="chat-body">
                                   <div className="header">
-                                    <strong className="primary-font float-left">
+                                    <strong className="primary-font">
                                       <Avatar className={classes.avatar}>
                                         {item.senderFirstName !== null
                                             ? getInitials(item.senderFirstName)
@@ -124,7 +139,7 @@ const message = (props) => {
                             (item.senderId !== id) ? (
                                 <div className="chat-body">
                                   <div className="header">
-                                    <strong className="primary-font float-right">
+                                    <strong className="primary-font">
                                       <Avatar className={classes.avatar}>
                                         {item.senderFirstName !== null
                                             ? getInitials(item.senderFirstName)
