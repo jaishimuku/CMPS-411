@@ -30,7 +30,7 @@ const message = (props) => {
 
   useEffect(() => {
     fetchMessages();
-  }, [message]);
+  });
 
   function fetchMessages() {
     fetch(
