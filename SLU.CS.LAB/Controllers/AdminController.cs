@@ -56,12 +56,24 @@ namespace SLU.CS.LAB.Controllers
             {
                 return NotFound();
             }
-            _context.Users.Remove(user);
+            else
+            {
+                var messages = await _context.Messages.Where(x => x.RecipientId == user.Id || x.SenderId == user.Id).ToListAsync();
+                if(messages != null)
+                {
+                    foreach (var item in messages)
+                    {
+                        _context.Remove(item);
+                    }
+                }
+               
+                _context.Remove(user);
+            }
+
             await _context.SaveChangesAsync();
 
-            return Ok("User Deleted");
+            return Ok("user deleted");
         }
-
         [HttpPut("{id}")]
         public  async Task<IActionResult> UpdateTA(int id, UpdateTADto user)
         {

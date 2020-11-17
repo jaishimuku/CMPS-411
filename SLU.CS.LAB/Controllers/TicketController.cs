@@ -44,8 +44,7 @@ namespace SLU.CS.LAB.Controllers
         [HttpGet]
         public ActionResult GetAllTickets() {
 
-            var tickets = _context.Tickets.OrderBy(x => x.IsResolved).ToList();
-
+            var tickets = _context.Tickets.OrderBy(x => x.SubmittedAt).ToList();
             return Ok(tickets);
         }
 
