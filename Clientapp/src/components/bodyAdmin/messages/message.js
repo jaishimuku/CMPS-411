@@ -31,6 +31,8 @@ const message = (props) => {
   useEffect(() => {
     fetchMessages();
   });
+  
+  
 
   function fetchMessages() {
     fetch(
